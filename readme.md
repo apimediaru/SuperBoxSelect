@@ -1,12 +1,20 @@
-SuperBoxSelect Extra for MODx Revolution
-=======================================
+# SuperBoxSelect
+## Select Resource(s) Custom Template Variable
 
-**Author:** Benjamin Vauchel <contact@omycode.fr>
+Advanced 'Resource List' template variable type for MODx Revolution based on the 
+SuperBoxSelect ExtJS Plugin. The template variable displays selected resources 
+as labelled boxes within the form field. The resource(s) could be searched by 
+autocomplete in the combo box. In the Input Options of the template variable 
+are a lot of options available to i.e. restrict the selectable resources etc.
 
-Official Documentation: http://www.omycode.fr/modx-extras/superboxselect.html  
-Bugs and Feature Requests: https://github.com/omycode/superboxselect  
-Questions: http://forums.modx.com/thread/41008/revo-superboxselect-tv
+It has two great advantages over the default 'Resource List' type:
+- Select more than one resource
+- Ajax based resource list (works with a lot of selectable resources)
 
-SuperBoxSelect is a TV for MODx Revolution 2.2 inspired by SuperBoxSelect ExtJS Plugin (http://www.technomedia.co.uk/SuperBoxSelect/examplesRemote.html).
+### Authors
 
-This TV displays selected resources as labelled boxes within the form field. As seen on facebook, hotmail and other sites, it combines both auto-complete and multi-selection capabilities.
+Benjamin Vauchel <benjamin.vauchel@gmail.com>, Thomas Jakobi <thomas.jakobi@partout.info>
+
+### Github Repository
+
+https://github.com/jako/superboxselect  

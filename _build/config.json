@@ -1,0 +1,37 @@
+{
+  "name": "SuperBoxSelect",
+  "lowCaseName": "superboxselect",
+  "description": "Select Resources with a Superboxselect",
+  "author": "Benjamin Vauchel, Thomas Jakobi",
+  "version": "2.0.0",
+  "package": {
+    "elements": {
+      "plugins": [
+        {
+          "name": "SuperBoxSelect",
+          "file": "superboxselect.plugin.php",
+          "description": "SuperBoxSelect runtime hooks - registers custom TV input types and includes javascripts on document edit pages.",
+          "events": [
+            "OnManagerPageBeforeRender",
+            "OnTVInputPropertiesList",
+            "OnTVInputRenderList",
+            "OnDocFormRender"
+          ]
+        }
+      ]
+    },
+    "systemSettings": [
+      {
+        "key": "debug",
+        "type": "combo-boolean",
+        "area": "system",
+        "value": "0"
+      }
+    ]
+  },
+  "build": {
+    "readme": "docs/readme.txt",
+    "license": "docs/license.txt",
+    "changelog": "docs/changelog.txt"
+  }
+}

@@ -1,0 +1,52 @@
+@charset "utf-8";
+.superboxselect-tv {
+  .x-superboxselect-btns {
+    .x-superboxselect-btn-clear {
+      width: 30px;
+      height: 30px;
+      position: absolute;
+      right: 30px;
+      border: none;
+      &:before {
+        box-sizing: border-box;
+        content: "";
+        font-size: 14px;
+        margin-top: -7px;
+        opacity: 0.6;
+        filter: alpha(opacity=60);
+        position: absolute;
+        top: 50%;
+        right: 0;
+        text-align: center;
+        width: 30px;
+        transition: opacity 0.25s;
+        display: inline-block;
+        font-family: FontAwesome;
+        font-style: normal;
+        font-weight: normal;
+        line-height: 1;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+    }
+    .x-superboxselect-btn-expand {
+      @extend .x-superboxselect-btn-clear;
+      right: 0;
+      border-radius: 0 3px 3px 0;
+      &:before {
+        content: "";
+      }
+    }
+    .x-superboxselect-btn-hide {
+      display: none;
+    }
+    .x-superboxselect-btn-over {
+      background-color: #3697cd;
+      &:before {
+        color: #fff;
+        opacity: 1;
+        filter: alpha(opacity=100);
+      }
+    }
+  }
+}
