@@ -62,7 +62,7 @@
                         return false;
                     }
                     return true;
-                }{/literal}{/if}{literal},
+                }{/literal},{/if}{literal}
                 additem: function (bs, v) {
                     MODx.fireResourceFormChange();
                 },
