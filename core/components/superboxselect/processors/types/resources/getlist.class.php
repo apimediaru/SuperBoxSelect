@@ -8,12 +8,31 @@
  */
 class SuperboxselectResourcesGetListProcessor extends modObjectGetListProcessor
 {
+    /**
+     * @var string $classKey
+     */
     public $classKey = 'modResource';
+    /**
+     * @var array $languageTopics
+     */
     public $languageTopics = array('superboxselect:default');
+    /**
+     * @var string $defaultSortField
+     */
     public $defaultSortField = 'pagetitle';
-    public $defaultSortDirection = 'DESC';
+    /**
+     * @var string $defaultSortDirection
+     */
+    public $defaultSortDirection = 'ASC';
+    /**
+     * @var string $objectType
+     */
     public $objectType = 'superboxselect.resources';
 
+    /**
+     * @param xPDOQuery $c
+     * @return xPDOQuery
+     */
     public function prepareQueryBeforeCount(xPDOQuery $c)
     {
         // Get Properties
@@ -92,10 +111,26 @@ class SuperboxselectResourcesGetListProcessor extends modObjectGetListProcessor
         return $c;
     }
 
+    /**
+     * @param xPDOQuery $c
+     * @return xPDOQuery
+     */
     public function prepareQueryAfterCount(xPDOQuery $c)
     {
         $c->sortby('pagetitle', 'ASC');
         return $c;
+    }
+
+    /**
+     * @param xPDOObject $object
+     * @return array
+     */
+    public function prepareRow(xPDOObject $object)
+    {
+        return array(
+            'id' => $object->get('id'),
+            'title' => $object->get('pagetitle')
+        );
     }
 }
 

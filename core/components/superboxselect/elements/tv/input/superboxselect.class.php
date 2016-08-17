@@ -3,8 +3,6 @@
 /**
  * SuperBoxSelect Input Render
  *
- * Copyright 2011-2016 by Benjamin Vauchel <contact@omycode.fr>
- *
  * @package superboxselect
  * @subpackage input_render
  */
@@ -31,9 +29,18 @@ class SuperboxselectInputRender extends modTemplateVarInputRender
             'contextKey' => ($this->modx->resource) ? $this->modx->resource->get('context_key') : 'web'
         ));
 
+        $response = $this->modx->runProcessor('types/' . $params['selectType'] . '/options', array(
+            'option' => 'fieldTpl',
+        ), array(
+            'processors_path' => $superboxselect->getOption('processorsPath')
+        ));
+        if ($response) {
+            $params['fieldTpl'] = $response->response;
+        }
+
         $this->setPlaceholder('params', $params);
         $this->setPlaceholder('value', str_replace('||', ',', $value));
-        $this->setPlaceholder('connector', $superboxselect->getOption('assetsUrl') . 'connector.php');
+        $this->setPlaceholder('connector', $superboxselect->getOption('connectorUrl'));
     }
 }
 

@@ -29,7 +29,7 @@ class SuperBoxSelect
      * The version
      * @var string $version
      */
-    public $version = '2.0.0';
+    public $version = '2.1.0';
 
     /**
      * The class config
@@ -73,6 +73,11 @@ class SuperBoxSelect
             'connectorUrl' => $assetsUrl . 'connector.php',
         ), $config);
 
+        // Set default options
+        $this->config = array_merge($this->config, array(
+            'advanced' => (bool)$this->getOption('advanced')
+        ));
+
         $this->modx->lexicon->load($this->namespace . ':default');
     }
 
@@ -114,6 +119,10 @@ class SuperBoxSelect
         if ($this->getOption('debug') && ($assetsUrl != MODX_ASSETS_URL . 'components/superboxselect/')) {
             $this->modx->regClientCSS($cssSourceUrl . 'superboxselect.css');
             $this->modx->regClientStartupScript($jsSourceUrl . 'superboxselect.js?v=v' . $this->version);
+            $this->modx->regClientStartupScript($jsSourceUrl . 'superboxselect.panel.inputoptions.js?v=v' . $this->version);
+            $this->modx->regClientStartupScript($jsSourceUrl . 'superboxselect.panel.inputoptions.resources.js?v=v' . $this->version);
+            $this->modx->regClientStartupScript($jsSourceUrl . 'superboxselect.panel.inputoptions.users.js?v=v' . $this->version);
+            $this->modx->regClientStartupScript($jsSourceUrl . 'superboxselect.combo.templatevar.js?v=v' . $this->version);
             $this->modx->regClientStartupScript($jsSourceUrl . 'superboxselect.renderer.js?v=v' . $this->version);
         } else {
             $this->modx->regClientCSS($cssUrl . 'superboxselect.min.css');

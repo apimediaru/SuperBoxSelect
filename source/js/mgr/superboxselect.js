@@ -5,14 +5,14 @@
  * @subpackage init script
  */
 
-var superBoxSelect = function (config) {
+var SuperBoxSelectTV = function (config) {
     config = config || {};
-    superBoxSelect.superclass.constructor.call(this, config);
+    SuperBoxSelectTV.superclass.constructor.call(this, config);
 };
 
-Ext.extend(superBoxSelect, Ext.Component, {
+Ext.extend(SuperBoxSelectTV, Ext.Component, {
     page: {}, window: {}, grid: {}, tree: {}, panel: {}, combo: {}, config: {}, jquery: {}, form: {}
 });
-Ext.reg('superboxselecttv', superBoxSelect);
+Ext.reg('superboxselecttv', SuperBoxSelectTV);
 
-SuperBoxSelect = new superBoxSelect();
+var SuperBoxSelect = new SuperBoxSelectTV();

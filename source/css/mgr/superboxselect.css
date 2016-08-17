@@ -1,4 +1,8 @@
 @charset "UTF-8";
+#modx-input-props {
+  padding: 0;
+}
+
 .superboxselect-tv .x-superboxselect-btns .x-superboxselect-btn-clear, .superboxselect-tv .x-superboxselect-btns .x-superboxselect-btn-expand {
   width: 30px;
   height: 30px;

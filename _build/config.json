@@ -3,7 +3,7 @@
   "lowCaseName": "superboxselect",
   "description": "Select Resources with a Superboxselect",
   "author": "Benjamin Vauchel, Thomas Jakobi",
-  "version": "2.0.0-pl2",
+  "version": "2.1.0",
   "package": {
     "elements": {
       "plugins": [
@@ -23,6 +23,12 @@
     "systemSettings": [
       {
         "key": "debug",
+        "type": "combo-boolean",
+        "area": "system",
+        "value": "0"
+      },
+      {
+        "key": "advanced",
         "type": "combo-boolean",
         "area": "system",
         "value": "0"
