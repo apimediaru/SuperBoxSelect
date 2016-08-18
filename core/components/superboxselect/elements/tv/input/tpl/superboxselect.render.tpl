@@ -28,7 +28,7 @@
         });
         new SuperBoxSelect.combo.SuperBoxSelectTV({
             options: { {/literal}
-                tvid: {$tv->id},
+                tvid: '{$tv->id}',
                 value: '{$value}',
                 allowBlank: {if $params.allowBlank === 1 || $params.allowBlank === 'true'}true{else}false{/if},
                 store: tv{$tv->id}store,
