@@ -1,4 +1,5 @@
 <div id="tv-input-properties-form"></div>
+{$inputOptionTypes}
 <script type="text/javascript">
     // <![CDATA[
     {literal}

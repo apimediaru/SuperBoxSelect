@@ -6,29 +6,14 @@
  * @package superboxselect
  * @subpackage processor
  */
-class SuperboxselectResourcesOptionsProcessor extends modProcessor
+include_once(dirname(dirname(__FILE__)) . '/options.class.php');
+
+class SuperboxselectResourcesOptionsProcessor extends SuperboxselectOptionsProcessor
 {
     /**
-     * @var array $languageTopics
+     * @var string
      */
-    public $languageTopics = array('superboxselect:default');
-
-    public function process()
-    {
-        $option = $this->getProperty('option');
-
-        $result = '';
-        if (method_exists($this, 'get' . ucfirst($option))) {
-            $method = 'get' . ucfirst($option);
-            $result = $this->$method();
-        }
-        return $result;
-    }
-
-    public function getFieldTpl()
-    {
-        return '{title} ({id})';
-    }
+    public $inputOptionType = 'resources';
 }
 
 return 'SuperboxselectResourcesOptionsProcessor';

@@ -28,7 +28,9 @@ SuperBoxSelect.panel.InputOptions = function (config) {
             anchor: '100%',
             url: SuperBoxSelect.config.connectorUrl,
             baseParams: {
-                action: 'mgr/selecttypes/getList'
+                action: 'mgr/selecttypes/getList',
+                tvId: MODx.request.id,
+                package: this.params.selectPackage || ''
             },
             listeners: {
                 select: {
@@ -62,6 +64,25 @@ SuperBoxSelect.panel.InputOptions = function (config) {
             html: _('superboxselect.selectPackage_desc'),
             cls: 'desc-under',
             hidden: !SuperBoxSelect.config.advanced
+        }, {
+            xtype: 'textfield',
+            fieldLabel: _('superboxselect.maxElements'),
+            description: MODx.expandHelp ? '' : _('superboxselect.maxElements_desc'),
+            name: 'inopt_maxElements',
+            id: 'inopt_maxElements',
+            value: this.params.maxElements || this.params.maxResources || '',
+            anchor: '100%',
+            listeners: {
+                change: {
+                    fn: this.markDirty,
+                    scope: this
+                }
+            }
+        }, {
+            xtype: MODx.expandHelp ? 'label' : 'hidden',
+            forId: 'inopt_maxElements',
+            html: _('superboxselect.maxElements_desc'),
+            cls: 'desc-under'
         }, {
             xtype: 'textfield',
             fieldLabel: _('superboxselect.fieldTpl'),
@@ -103,13 +124,10 @@ SuperBoxSelect.panel.InputOptions = function (config) {
             forId: 'inopt_allowBlank',
             html: _('required_desc'),
             cls: 'desc-under'
-        }, [{
-            xtype: 'superboxselect-panel-inputoptions-resources',
-            params: params
         }, {
-            xtype: 'superboxselect-panel-inputoptions-users',
-            params: params
-        }], {
+            xtype: 'superboxselect-panel-inputoptions-types',
+            params: this.params
+        }, {
             xtype: 'numberfield',
             fieldLabel: _('superboxselect.pageSize'),
             description: MODx.expandHelp ? '' : _('superboxselect.pageSize_desc'),

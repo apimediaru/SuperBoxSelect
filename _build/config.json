@@ -1,7 +1,7 @@
 {
   "name": "SuperBoxSelect",
   "lowCaseName": "superboxselect",
-  "description": "Select Resources with a Superboxselect",
+  "description": "Advanced Listbox / Resource List Template Variable Type",
   "author": "Benjamin Vauchel, Thomas Jakobi",
   "version": "2.1.0",
   "package": {

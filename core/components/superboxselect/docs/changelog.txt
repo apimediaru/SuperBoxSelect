@@ -3,7 +3,9 @@ Changelog for SuperBoxSelect
 
 - 2.1.0
     - The superboxselect is not restricted anymore to list only resources
-    - Add own selectable types
+    - Single value
+    - Two default types (resources, users)
+    - Add own package based types
 - 2.0.0
     - Input options for template variables
     - Pagination of the superboxselect

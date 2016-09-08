@@ -16,13 +16,12 @@ class SuperboxselectInputRender extends modTemplateVarInputRender
 
     public function process($value, array $params = array())
     {
-        // Load superboxselect class
         $corePath = $this->modx->getOption('superboxselect.core_path', null, $this->modx->getOption('core_path') . 'components/superboxselect/');
-        $superboxselect = $this->modx->getService('superboxselect', 'Superboxselect', $corePath . 'model/superboxselect/', array(
+        /** @var SuperBoxSelect $superboxselect */
+        $superboxselect = $this->modx->getService('superboxselect', 'SuperBoxSelect', $corePath . 'model/superboxselect/', array(
             'core_path' => $corePath
         ));
-        // Load required javascripts & register global config
-        $superboxselect->includeScriptAssets();
+        $superboxselect->includeScriptAssets(isset($params['selectPackage']) ? $params['selectPackage'] : '');
 
         $params = array_merge($params, array(
             'resourceId' => ($this->modx->resource) ? $this->modx->resource->get('id') : 0,
@@ -32,7 +31,10 @@ class SuperboxselectInputRender extends modTemplateVarInputRender
         $response = $this->modx->runProcessor('types/' . $params['selectType'] . '/options', array(
             'option' => 'fieldTpl',
         ), array(
-            'processors_path' => $superboxselect->getOption('processorsPath')
+            'processors_path' => $superboxselect->getProcessorsPath(array(
+                'action' => 'types/',
+                'package' => isset($params['selectPackage']) ? $params['selectPackage'] : ''
+            ))
         ));
         if ($response) {
             $params['fieldTpl'] = $response->response;

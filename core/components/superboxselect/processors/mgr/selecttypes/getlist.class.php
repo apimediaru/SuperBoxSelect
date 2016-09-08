@@ -12,8 +12,8 @@ class SuperboxselectSelecttypesGetListProcessor extends modProcessor
 
     public function process()
     {
-        /** @var SuperBoxSelect $superboxselect */
         $corePath = $this->modx->getOption('superboxselect.core_path', null, $this->modx->getOption('core_path') . 'components/superboxselect/');
+        /** @var SuperBoxSelect $superboxselect */
         $superboxselect = $this->modx->getService('superboxselect', 'SuperBoxSelect', $corePath . '/model/superboxselect/', array(
             'core_path' => $corePath
         ));
@@ -24,6 +24,7 @@ class SuperboxselectSelecttypesGetListProcessor extends modProcessor
         if ($package) {
             $packageCorePath = $this->modx->getOption($package . '.core_path', null, $this->modx->getOption('core_path') . 'components/' . $package . '/');
             $packageProcessorsPath = $packageCorePath . 'processors/';
+            $this->modx->lexicon->load($package . ':default');
         } else {
             $packageProcessorsPath = $superboxselect->getOption('processorsPath');
             $package = 'superboxselect';

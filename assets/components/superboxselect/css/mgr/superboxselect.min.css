@@ -1,7 +1,7 @@
 /*!
- * SuperBoxSelect - Select Resources with a Superboxselect
+ * SuperBoxSelect - Advanced Listbox / Resource List Template Variable Type
  * Version: 2.1.0
- * Build date: 2016-08-18
+ * Build date: 2016-09-08
  */
 
 @charset "UTF-8";#modx-input-props{padding:0}.superboxselect-tv .x-superboxselect-btns .x-superboxselect-btn-clear,.superboxselect-tv .x-superboxselect-btns .x-superboxselect-btn-expand{width:30px;height:30px;position:absolute;right:30px;border:none}.superboxselect-tv .x-superboxselect-btns .x-superboxselect-btn-clear:before,.superboxselect-tv .x-superboxselect-btns .x-superboxselect-btn-expand:before{box-sizing:border-box;content:"";font-size:14px;margin-top:-7px;opacity:.6;filter:alpha(opacity=60);position:absolute;top:50%;right:0;text-align:center;width:30px;transition:opacity .25s;display:inline-block;font-family:FontAwesome;font-style:normal;font-weight:400;line-height:1;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}.superboxselect-tv .x-superboxselect-btns .x-superboxselect-btn-expand{right:0;border-radius:0 3px 3px 0}.superboxselect-tv .x-superboxselect-btns .x-superboxselect-btn-expand:before{content:""}.superboxselect-tv .x-superboxselect-btns .x-superboxselect-btn-hide{display:none}.superboxselect-tv .x-superboxselect-btns .x-superboxselect-btn-over{background-color:#3697cd}.superboxselect-tv .x-superboxselect-btns .x-superboxselect-btn-over:before{color:#fff;opacity:1;filter:alpha(opacity=100)}

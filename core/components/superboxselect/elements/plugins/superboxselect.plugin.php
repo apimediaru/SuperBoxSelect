@@ -1,7 +1,7 @@
 <?php
 /**
  * SuperBoxSelect Runtime Hooks
- * 
+ *
  * Registers custom TV input types and includes javascripts on
  * document edit pages so that the TV can be used from within other extras
  * (i.e. MIGX, Collections)
@@ -18,6 +18,7 @@
  */
 
 $corePath = $modx->getOption('superboxselect.core_path', null, $modx->getOption('core_path') . 'components/superboxselect/');
+/** @var SuperBoxSelect $superboxselect */
 $superboxselect = $modx->getService('superboxselect', 'SuperBoxSelect', $corePath . 'model/superboxselect/', array(
     'core_path' => $corePath
 ));
@@ -25,7 +26,16 @@ $superboxselect = $modx->getService('superboxselect', 'SuperBoxSelect', $corePat
 switch ($modx->event->name) {
     case 'OnManagerPageBeforeRender':
         $modx->controller->addLexiconTopic('superboxselect:default');
-        $superboxselect->includeScriptAssets();
+        $tvId = $modx->controller->scriptProperties['id'];
+        /** @var modTemplateVar $tv */
+        $tv = $modx->getObject('modTemplateVar', $tvId);
+        if ($tv) {
+            $tvProperties = $tv->get('input_properties');
+            $package = $tvProperties['selectPackage'];
+        } else {
+            $package = '';
+        }
+        $superboxselect->includeScriptAssets($package);
         break;
     case 'OnTVInputRenderList':
         $modx->event->output($corePath . 'elements/tv/input/');

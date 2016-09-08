@@ -44,25 +44,6 @@ SuperBoxSelect.panel.InputOptionsResources = function (config) {
                 cls: 'desc-under'
             }, {
                 xtype: 'textfield',
-                fieldLabel: _('superboxselect.maxResources'),
-                description: MODx.expandHelp ? '' : _('superboxselect.maxResources_desc'),
-                name: 'inopt_maxResources',
-                id: 'inopt_maxResources',
-                value: this.params.maxResources || '',
-                anchor: '100%',
-                listeners: {
-                    change: {
-                        fn: this.markDirty,
-                        scope: this
-                    }
-                }
-            }, {
-                xtype: MODx.expandHelp ? 'label' : 'hidden',
-                forId: 'inopt_maxResources',
-                html: _('superboxselect.maxResources_desc'),
-                cls: 'desc-under'
-            }, {
-                xtype: 'textfield',
                 fieldLabel: _('resourcelist_depth'),
                 description: MODx.expandHelp ? '' : _('resourcelist_depth_desc'),
                 name: 'inopt_depth',

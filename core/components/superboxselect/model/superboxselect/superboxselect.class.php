@@ -108,7 +108,7 @@ class SuperBoxSelect
     /**
      * Render supporting javascript to try and help it work with MIGX etc
      */
-    public function includeScriptAssets()
+    public function includeScriptAssets($package)
     {
         $assetsUrl = $this->getOption('assetsUrl');
         $jsUrl = $this->getOption('jsUrl') . 'mgr/';
@@ -117,21 +117,92 @@ class SuperBoxSelect
         $cssSourceUrl = $assetsUrl . '../../../source/css/mgr/';
 
         if ($this->getOption('debug') && ($assetsUrl != MODX_ASSETS_URL . 'components/superboxselect/')) {
-            $this->modx->regClientCSS($cssSourceUrl . 'superboxselect.css');
-            $this->modx->regClientStartupScript($jsSourceUrl . 'superboxselect.js?v=v' . $this->version);
-            $this->modx->regClientStartupScript($jsSourceUrl . 'superboxselect.panel.inputoptions.js?v=v' . $this->version);
-            $this->modx->regClientStartupScript($jsSourceUrl . 'superboxselect.panel.inputoptions.resources.js?v=v' . $this->version);
-            $this->modx->regClientStartupScript($jsSourceUrl . 'superboxselect.panel.inputoptions.users.js?v=v' . $this->version);
-            $this->modx->regClientStartupScript($jsSourceUrl . 'superboxselect.combo.templatevar.js?v=v' . $this->version);
-            $this->modx->regClientStartupScript($jsSourceUrl . 'superboxselect.renderer.js?v=v' . $this->version);
+            $this->modx->controller->addCss($cssSourceUrl . 'superboxselect.css');
+            $this->modx->controller->addJavascript($jsSourceUrl . 'superboxselect.js?v=v' . $this->version);
+            $this->modx->controller->addJavascript($jsSourceUrl . 'superboxselect.panel.inputoptions.js?v=v' . $this->version);
+            $this->modx->controller->addJavascript($jsSourceUrl . 'superboxselect.combo.templatevar.js?v=v' . $this->version);
+            $this->modx->controller->addJavascript($jsSourceUrl . 'superboxselect.renderer.js?v=v' . $this->version);
         } else {
-            $this->modx->regClientCSS($cssUrl . 'superboxselect.min.css');
-            $this->modx->regClientStartupScript($jsUrl . 'superboxselect.min.js?v=v' . $this->version);
+            $this->modx->controller->addCss($cssUrl . 'superboxselect.min.css');
+            $this->modx->controller->addJavascript($jsUrl . 'superboxselect.min.js?v=v' . $this->version);
         }
-        $this->modx->regClientStartupHTMLBlock('<script type="text/javascript">'
+
+        if ($package) {
+            $packageCorePath = $this->modx->getOption($package . '.core_path', null, $this->modx->getOption('core_path') . 'components/' . $package . '/');
+            $packageJsPath = $packageCorePath . 'js/';
+            $packageAssetsUrl = $this->getOption($package . '.assets_url', null, $this->modx->getOption('assets_url') . 'components/' . $package . '/');
+            $packageJsUrl = $packageAssetsUrl . 'js/';
+            $packageJsSourceUrl = $packageAssetsUrl . '../../../source/js/';
+        } else {
+            $packageJsPath = $this->getOption('assetsPath') . 'js/';
+            $packageJsUrl = $this->getOption('jsUrl');
+            $packageJsSourceUrl = $this->getOption('assetsUrl') . '../../../source/js/';
+        }
+
+        if ($this->getOption('debug') && ($assetsUrl != MODX_ASSETS_URL . 'components/superboxselect/')) {
+            $files = glob($packageJsPath . 'types/*', GLOB_ONLYDIR);
+            foreach ($files as $file) {
+                $basename = basename($file);
+                $this->modx->controller->addJavascript($packageJsSourceUrl . 'types/' . $basename . '/superboxselect.panel.inputoptions.js?v=v' . $this->version);
+            }
+        } else {
+            $files = glob($packageJsPath . 'types/*', GLOB_ONLYDIR);
+            foreach ($files as $file) {
+                $basename = basename($file);
+                $this->modx->controller->addJavascript($packageJsUrl . 'types/' . $basename . '/superboxselect.panel.inputoptions.min.js?v=v' . $this->version);
+            }
+        }
+
+        $this->modx->controller->addHtml('<script type="text/javascript">'
             . ' SuperBoxSelect.config = ' . json_encode($this->config) . ';'
             . '</script>');
     }
-}
 
-define('superboxselect', true);
+    /**
+     * @return array
+     */
+    public function getProcessorsPath($params)
+    {
+        $package = preg_replace('/[^a-zA-Z0-9_]+/', '', isset($params['package']) ? $params['package'] : '');
+        $action = isset($params['action']) ? $params['action'] : '';
+
+        if ($package && strpos($action, 'types/') === 0) {
+            $packageCorePath = $this->modx->getOption($package . '.core_path', null, $this->modx->getOption('core_path') . 'components/' . $package . '/');
+            $processorsPath = $packageCorePath . 'processors/';
+        } else {
+            $processorsPath = $this->getOption('processorsPath');
+        }
+
+        return $processorsPath;
+    }
+
+    public function getInputOptionTypes($package)
+    {
+        if ($package) {
+            $packageCorePath = $this->modx->getOption($package . '.core_path', null, $this->modx->getOption('core_path') . 'components/' . $package . '/');
+            $packageProcessorsPath = $packageCorePath . 'processors/';
+        } else {
+            $packageProcessorsPath = $this->getOption('processorsPath');
+        }
+
+        $files = glob($packageProcessorsPath . 'types/*', GLOB_ONLYDIR);
+        $types = array();
+        $scripts = array();
+        foreach ($files as $file) {
+            $response = $this->modx->runProcessor('types/' . basename($file) . '/options', array(
+                'option' => 'inputOptionType',
+            ), array(
+                'processors_path' => $this->getProcessorsPath(array(
+                    'action' => 'types/',
+                    'package' => $package
+                ))
+            ));
+            if ($response) {
+                $types[] = $response->response['type'];
+            }
+        }
+
+        $this->modx->smarty->assign('types', implode(',', $types));
+        return $this->modx->smarty->fetch($this->getOption('processorsPath') . 'mgr/selecttypes/tpl/superbox.inputoptions.type.tpl');
+    }
+}
