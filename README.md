@@ -11,14 +11,10 @@ selectable content etc.
 
 It has two great advantages over the default `Listbox` / `Resource List` 
 template variable types:
-- Select more than one resource
-- Ajax based list (works with a lot of selectable resources or other list with a lot of items)
+- Select more than one item (i.e. resource)
+- AJAX based list (works fast with a lot of selectable items by pagination)
 
 ### Authors
 
 - Benjamin Vauchel <benjamin.vauchel@gmail.com> (until version 1.0.1-pl2)
 - Thomas Jakobi <thomas.jakobi@partout.info> (since version 2.0.0)
-
-### Github Repository
-
-https://github.com/jako/superboxselect  
