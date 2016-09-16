@@ -21,7 +21,7 @@
                 'package': '{$params.selectPackage}'{literal}
             }
         });{/literal}
-        {if $params.maxElements > 1} {literal}
+        {if $params.maxElements != 1 } {literal}
         new SuperBoxSelect.combo.SuperBoxSelectTV({
             options: { {/literal}
                 tvid: '{$tv->id}',
