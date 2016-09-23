@@ -41,6 +41,12 @@ class SuperboxselectResourcesGetListProcessor extends modObjectGetListProcessor
         $context_key = $this->getProperty('context_key', false);
         $depth = $this->getProperty('depth', 10);
         $limitRelatedContext = $this->getProperty('limitRelatedContext', false);
+        $where = $this->getProperty('where', array());
+
+        if($where) {
+            $where = $this->modx->fromJSON($where);
+            $c->where($where);
+        }
 
         // Get the context of the current edited resource
         if (!$context_key) {
