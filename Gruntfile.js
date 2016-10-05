@@ -103,7 +103,7 @@ module.exports = function (grunt) {
                     srcBasePath: 'develop/superboxselect/',
                     host: '<%= sshconfig.host %>',
                     username: '<%= sshconfig.username %>',
-                    privateKey: grunt.file.read("/Users/jako/.ssh/id_dsa"),
+                    privateKey: '<%= sshconfig.privateKey %>',
                     passphrase: '<%= sshconfig.passphrase %>',
                     showProgress: true
                 }
@@ -119,7 +119,7 @@ module.exports = function (grunt) {
                     srcBasePath: 'develop/superboxselect/',
                     host: '<%= sshconfig.host %>',
                     username: '<%= sshconfig.username %>',
-                    privateKey: grunt.file.read("/Users/jako/.ssh/id_dsa"),
+                    privateKey: '<%= sshconfig.privateKey %>',
                     passphrase: '<%= sshconfig.passphrase %>',
                     showProgress: true
                 }

@@ -1,6 +1,8 @@
 Changelog for SuperBoxSelect
 ============================
 
+- 2.1.1
+    - Bugfix for 'Cannot redeclare class SuperboxselectOptionsProcessor'
 - 2.1.0
     - The superboxselect is not restricted anymore to list only resources
     - Single value

@@ -6,7 +6,9 @@
  * @package superboxselect
  * @subpackage processor
  */
-include_once(dirname(dirname(__FILE__)) . '/options.class.php');
+if (!class_exists('SuperboxselectOptionsProcessor')) {
+    include(dirname(dirname(__FILE__)) . '/options.class.php');
+}
 
 class SuperboxselectResourcesOptionsProcessor extends SuperboxselectOptionsProcessor
 {
