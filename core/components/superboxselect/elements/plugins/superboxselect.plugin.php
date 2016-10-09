@@ -26,7 +26,7 @@ $superboxselect = $modx->getService('superboxselect', 'SuperBoxSelect', $corePat
 switch ($modx->event->name) {
     case 'OnManagerPageBeforeRender':
         $modx->controller->addLexiconTopic('superboxselect:default');
-        $tvId = $modx->controller->scriptProperties['id'];
+        $tvId = isset($modx->controller->scriptProperties['id']) ? $modx->controller->scriptProperties['id'] : 0;
         /** @var modTemplateVar $tv */
         $tv = $modx->getObject('modTemplateVar', $tvId);
         if ($tv) {
