@@ -36,12 +36,19 @@ class SuperboxselectResourcesGetListProcessor extends modObjectGetListProcessor
     public function prepareQueryBeforeCount(xPDOQuery $c)
     {
         // Get Properties
-        $parents = explode(',', $this->getProperty('parents', '0'));
-        $resource_id = intval($this->getProperty('resource_id'));
-        $context_key = $this->getProperty('context_key', false);
-        $depth = $this->getProperty('depth', 10);
-        $limitRelatedContext = $this->getProperty('limitRelatedContext', false);
+        $id = $this->getProperty('id');
         $where = $this->getProperty('where', array());
+        $context_key = $this->getProperty('context_key', false);
+        $resource_id = intval($this->getProperty('resource_id'));
+        $limitRelatedContext = $this->getProperty('limitRelatedContext', false);
+        $parents = explode(',', $this->getProperty('parents', '0'));
+        $depth = $this->getProperty('depth', 10);
+
+        if (!empty($id)) {
+            $c->where(array(
+                'id:IN' => array_map('intval', explode('|', $id))
+            ));
+        }
 
         if($where) {
             $where = $this->modx->fromJSON($where);

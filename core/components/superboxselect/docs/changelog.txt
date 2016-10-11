@@ -2,6 +2,7 @@ Changelog for SuperBoxSelect
 ============================
 
 - 2.1.1
+    - Bugfix for single value combo not saving the value
     - Bugfix for 'Cannot redeclare class SuperboxselectOptionsProcessor'
 - 2.1.0
     - The superboxselect is not restricted anymore to list only resources

@@ -36,8 +36,15 @@ class SuperboxselectUsersGetListProcessor extends modObjectGetListProcessor
     public function prepareQueryBeforeCount(xPDOQuery $c)
     {
         // Get Properties
-        $allowedUsergroups = $this->getProperty('allowedUsergroups', '');
-        $deniedUsergroups = $this->getProperty('deniedUsergroups', '');
+        $id = $this->getProperty('id');
+        $allowedUsergroups = $this->getProperty('allowedUsergroups');
+        $deniedUsergroups = $this->getProperty('deniedUsergroups');
+
+        if (!empty($id)) {
+            $c->where(array(
+                'id:IN' => array_map('intval', explode('|', $id))
+            ));
+        }
 
         $c->select($this->modx->getSelectColumns('modUser', 'modUser', '', array('id', 'username')));
 

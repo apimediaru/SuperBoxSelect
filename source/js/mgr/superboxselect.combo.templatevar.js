@@ -22,20 +22,6 @@ SuperBoxSelect.combo.SuperBoxSelectTV = function (config) {
         displayField: 'title',
         displayFieldTpl: this.options.fieldTpl,
         fieldLabel: this.options.fieldLabel,
-        minChars: 2,
-        mode: 'remote',
-        msgTarget: 'title',
-        name: 'tv' + this.tvid + '[]',
-        pageSize: this.options.pageSize,
-        queryDelay: 0,
-        store: this.options.store,
-        styleField: 'style',
-        tpl: '<tpl for="."><div class="x-combo-list-item">' + this.options.fieldTpl + '</div></tpl>',
-        transform: 'superboxselect-tv-' + this.tvid,
-        triggerAction: 'all',
-        value: this.options.value,
-        valueField: 'id',
-        width: 400,
         listeners: {
             afterrender: {
                 fn: this.afterrender,
@@ -53,7 +39,21 @@ SuperBoxSelect.combo.SuperBoxSelectTV = function (config) {
                 fn: this.removeitem,
                 scope: this
             }
-        }
+        },
+        minChars: 2,
+        mode: 'remote',
+        msgTarget: 'title',
+        name: 'tv' + this.tvid + '[]',
+        pageSize: this.options.pageSize,
+        queryDelay: 0,
+        store: this.options.store,
+        styleField: 'style',
+        tpl: '<tpl for="."><div class="x-combo-list-item">' + this.options.fieldTpl + '</div></tpl>',
+        transform: 'superboxselect-tv-' + this.tvid,
+        triggerAction: 'all',
+        value: this.options.value,
+        valueField: 'id',
+        width: 400
     });
     SuperBoxSelect.combo.SuperBoxSelectTV.superclass.constructor.call(this, config);
 };
@@ -96,19 +96,17 @@ SuperBoxSelect.combo.SuperBoxSelectTVSingle = function (config) {
     Ext.applyIf(config, {
         allowBlank: this.options.allowBlank,
         anchor: '100%',
-        classField: 'cls',
         ctCls: 'superboxselect-tv',
         displayField: 'title',
-        displayFieldTpl: this.options.fieldTpl,
         fieldLabel: this.options.fieldLabel,
+        hiddenName: 'tv' + this.tvid,
         minChars: 2,
         mode: 'remote',
         msgTarget: 'title',
-        name: 'tv' + this.tvid + '[]',
+        name: 'tv' + this.tvid,
         pageSize: this.options.pageSize,
         queryDelay: 0,
         store: this.options.store,
-        styleField: 'style',
         tpl: '<tpl for="."><div class="x-combo-list-item">' + this.options.fieldTpl + '</div></tpl>',
         transform: 'superboxselect-tv-' + this.tvid,
         triggerAction: 'all',
