@@ -105,10 +105,12 @@ class SuperBoxSelect
         return $option;
     }
 
+
     /**
      * Render supporting javascript to try and help it work with MIGX etc
+     * @param string $package
      */
-    public function includeScriptAssets($package)
+    public function includeScriptAssets($package = '')
     {
         $assetsUrl = $this->getOption('assetsUrl');
         $jsUrl = $this->getOption('jsUrl') . 'mgr/';
@@ -176,6 +178,10 @@ class SuperBoxSelect
         return $processorsPath;
     }
 
+    /**
+     * @param $package
+     * @return string
+     */
     public function getInputOptionTypes($package)
     {
         if ($package) {
@@ -187,7 +193,6 @@ class SuperBoxSelect
 
         $files = glob($packageProcessorsPath . 'types/*', GLOB_ONLYDIR);
         $types = array();
-        $scripts = array();
         foreach ($files as $file) {
             $response = $this->modx->runProcessor('types/' . basename($file) . '/options', array(
                 'option' => 'inputOptionType',

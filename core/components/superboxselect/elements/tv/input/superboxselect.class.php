@@ -25,7 +25,8 @@ class SuperboxselectInputRender extends modTemplateVarInputRender
 
         $params = array_merge($params, array(
             'resourceId' => ($this->modx->resource) ? $this->modx->resource->get('id') : 0,
-            'contextKey' => ($this->modx->resource) ? $this->modx->resource->get('context_key') : 'web'
+            'contextKey' => ($this->modx->resource) ? $this->modx->resource->get('context_key') : 'web',
+            'selectType' => (isset($params['selectType']) && $params['selectType'] != '') ? $params['selectType'] : 'resources'
         ));
 
         $response = $this->modx->runProcessor('types/' . $params['selectType'] . '/options', array(
