@@ -126,12 +126,16 @@ module.exports = function (grunt) {
             }
         },
         watch: {
-            scripts: {
-                files: ['source/**/*.js'],
+            js: {
+                files: [
+                    'source/**/*.js'
+                ],
                 tasks: ['uglify', 'usebanner:js', 'sftp:js']
             },
             css: {
-                files: ['source/**/*.scss'],
+                files: [
+                    'source/**/*.scss'
+                ],
                 tasks: ['sass', 'cssmin', 'usebanner:css', 'sftp:css']
             }
         },
