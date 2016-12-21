@@ -10,8 +10,8 @@ $_lang['superboxselect'] = 'SuperBoxSelect';
 
 $_lang['superboxselect.allowedUsergroups'] = 'Erlaubte Benutzergruppen';
 $_lang['superboxselect.allowedUsergroups_desc'] = 'Komma-getrennte Liste von erlaubten Benutzergruppen';
-$_lang['superboxselect.deniedUsergroups'] = 'Denied Usergroups';
-$_lang['superboxselect.deniedUsergroups_desc'] = 'Comma separated list of denied usergroups';
+$_lang['superboxselect.deniedUsergroups'] = 'Abgelehnte Benutzergruppen';
+$_lang['superboxselect.deniedUsergroups_desc'] = 'Komma-getrennte Liste von abgelehnten Benutzergruppen';
 $_lang['superboxselect.fieldTpl'] = 'Feld Template';
 $_lang['superboxselect.fieldTpl_desc'] = 'Feld Template für die SuperBoxSelect (kann Html-Tags enthalten). Standard: <code>{title} ({id})</code>';
 $_lang['superboxselect.maxElements'] = 'Max. Elemente';
