@@ -29,7 +29,7 @@ class SuperBoxSelect
      * The version
      * @var string $version
      */
-    public $version = '2.1.1';
+    public $version = '2.2.0';
 
     /**
      * The class config
@@ -120,6 +120,7 @@ class SuperBoxSelect
 
         if ($this->getOption('debug') && ($assetsUrl != MODX_ASSETS_URL . 'components/superboxselect/')) {
             $this->modx->controller->addCss($cssSourceUrl . 'superboxselect.css');
+            $this->modx->controller->addJavascript($jsSourceUrl . 'vendor/Sortable.js?v=v' . $this->version);
             $this->modx->controller->addJavascript($jsSourceUrl . 'superboxselect.js?v=v' . $this->version);
             $this->modx->controller->addJavascript($jsSourceUrl . 'superboxselect.panel.inputoptions.js?v=v' . $this->version);
             $this->modx->controller->addJavascript($jsSourceUrl . 'superboxselect.combo.templatevar.js?v=v' . $this->version);

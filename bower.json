@@ -1,0 +1,20 @@
+{
+  "name": "SuperBoxSelect",
+  "description": "Advanced Listbox / Resource List Template Variable Type",
+  "authors": [
+    "Benjamin Vauchel <benjamin.vauchel@gmail.com>",
+    "Thomas Jakobi <thomas.jakobi@partout.info>"
+  ],
+  "license": "GPLv2",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "Sortable": "0.5.2"
+  },
+  "private": true
+}

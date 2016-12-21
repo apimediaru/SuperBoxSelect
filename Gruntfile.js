@@ -8,6 +8,20 @@ module.exports = function (grunt) {
         ' * Version: <%= modx.version %>\n' +
         ' * Build date: <%= grunt.template.today("yyyy-mm-dd") %>\n' +
         ' */\n',
+        bowercopy: {
+            options: {
+                clean: false,
+                report: false
+            },
+            vendor: {
+                options: {
+                    destPrefix: 'source/js/mgr/vendor'
+                },
+                files: {
+                    'Sortable.js': 'Sortable/Sortable.js'
+                }
+            }
+        },
         usebanner: {
             css: {
                 options: {
@@ -37,6 +51,7 @@ module.exports = function (grunt) {
         uglify: {
             mgr: {
                 src: [
+                    'source/js/mgr/vendor/Sortable.js',
                     'source/js/mgr/superboxselect.js',
                     'source/js/mgr/superboxselect.panel.inputoptions.js',
                     'source/js/mgr/superboxselect.combo.templatevar.js',
@@ -168,6 +183,7 @@ module.exports = function (grunt) {
     });
 
     //load the packages
+    grunt.loadNpmTasks('grunt-bowercopy');
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-cssmin');
     grunt.loadNpmTasks('grunt-contrib-watch');
@@ -179,5 +195,5 @@ module.exports = function (grunt) {
     grunt.renameTask('string-replace', 'bump');
 
     //register the task
-    grunt.registerTask('default', ['bump', 'uglify', 'sass', 'postcss', 'cssmin', 'usebanner', 'sftp']);
+    grunt.registerTask('default', ['bump', 'bowercopy', 'uglify', 'sass', 'postcss', 'cssmin', 'usebanner', 'sftp']);
 };

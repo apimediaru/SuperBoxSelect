@@ -1,6 +1,8 @@
 Changelog for SuperBoxSelect
 ============================
 
+- 2.2.0
+    - Sort the items by drag & drop
 - 2.1.2
     - Fix backwards compatibility issue
 - 2.1.1

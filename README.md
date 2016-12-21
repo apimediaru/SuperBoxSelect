@@ -1,5 +1,5 @@
 # SuperBoxSelect
-## SuperBoxSelect Custom Template Variable
+## SuperBoxSelect Custom Template Variable Type
 
 Advanced `Listbox` / `Resource List` template variable type for MODx Revolution 
 based on the SuperBoxSelect ExtJS Plugin. The template variable displays 
@@ -12,9 +12,13 @@ selectable content etc.
 It has two great advantages over the default `Listbox` / `Resource List` 
 template variable types:
 - Select more than one item (i.e. resource)
-- AJAX based list (works fast with a lot of selectable items by pagination)
+- Ajax based list (works fast with a lot of selectable items by pagination)
 
 ### Authors
 
 - Benjamin Vauchel <benjamin.vauchel@gmail.com> (until version 1.0.1-pl2)
 - Thomas Jakobi <thomas.jakobi@partout.info> (since version 2.0.0)
+
+### Translation
+
+The project could be translated on https://crowdin.com/project/superboxselect
