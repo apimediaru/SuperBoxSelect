@@ -9,11 +9,11 @@
 $_lang['superboxselect'] = 'SuperBoxSelect';
 
 $_lang['superboxselect.allowedUsergroups'] = 'Erlaubte Benutzergruppen';
-$_lang['superboxselect.allowedUsergroups_desc'] = 'Comma separated list of allowed usergroups';
+$_lang['superboxselect.allowedUsergroups_desc'] = 'Komma-getrennte Liste von erlaubten Benutzergruppen';
 $_lang['superboxselect.deniedUsergroups'] = 'Denied Usergroups';
 $_lang['superboxselect.deniedUsergroups_desc'] = 'Comma separated list of denied usergroups';
-$_lang['superboxselect.fieldTpl'] = 'Field Template';
-$_lang['superboxselect.fieldTpl_desc'] = 'Field Template for the SuperBoxSelect (could contain html tags). Default: <code>{title} ({id})</code>';
+$_lang['superboxselect.fieldTpl'] = 'Feld Template';
+$_lang['superboxselect.fieldTpl_desc'] = 'Feld Template für die SuperBoxSelect (kann Html-Tags enthalten). Standard: <code>{title} ({id})</code>';
 $_lang['superboxselect.maxElements'] = 'Max. Elemente';
 $_lang['superboxselect.maxElements_desc'] = 'Maximale Anzahl von Elementen in der Liste (0 bedeutet keine Einschränkung)';
 $_lang['superboxselect.pageSize'] = 'Seitengröße';
