@@ -19,17 +19,17 @@ $_lang['superboxselect.maxElements_desc'] = 'Maximale Anzahl von Elementen in de
 $_lang['superboxselect.pageSize'] = 'Seitengröße';
 $_lang['superboxselect.pageSize_desc'] = 'Wenn die Seitengröße größer als 0 ist, wird eine Paginierung in der Fußzeile der Dropdown-Liste angezeigt.';
 $_lang['superboxselect.selectPackage'] = 'Package';
-$_lang['superboxselect.selectPackage_desc'] = 'Folder name of a package, where the \'types\' getlists processor are retrieved from.';
-$_lang['superboxselect.selectType'] = 'Type';
-$_lang['superboxselect.selectType_desc'] = 'Content type of the dropdown list.';
+$_lang['superboxselect.selectPackage_desc'] = 'Name des Ordners eines Packages, in dem sich die "Typ" List Prozessoren befinden.';
+$_lang['superboxselect.selectType'] = 'Typ';
+$_lang['superboxselect.selectType_desc'] = 'Inhaltstyp der Dropdown-Liste.';
 
 $_lang['superboxselect.maxElements_label'] = 'max. {maxElements}';
 $_lang['superboxselect.maxElements_msg'] = 'Maximale Anzahl von Elementen erreicht.';
 
-$_lang['superboxselect.resources'] = 'Resources';
-$_lang['superboxselect.users'] = 'Users';
+$_lang['superboxselect.resources'] = 'Ressourcen';
+$_lang['superboxselect.users'] = 'Benutzer';
 
-$_lang['setting_superboxselect.advanced'] = 'Advanced';
-$_lang['setting_superboxselect.advanced_desc'] = 'Display advanced TV settings (i.e. Package and Field Template).';
+$_lang['setting_superboxselect.advanced'] = 'Erweitert';
+$_lang['setting_superboxselect.advanced_desc'] = 'Erweiterte TV-Einstellungen anzeigen (z.B. Package und Feld Template).';
 $_lang['setting_superboxselect.debug'] = 'Debug';
-$_lang['setting_superboxselect.debug_desc'] = 'Log debug informations in MODX error log.';
+$_lang['setting_superboxselect.debug_desc'] = 'Debug-Informationen im MODX Fehlerprotokoll ausgeben.';
