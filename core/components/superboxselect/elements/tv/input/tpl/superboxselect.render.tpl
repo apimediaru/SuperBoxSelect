@@ -28,7 +28,7 @@
                 fieldLabel: _('superboxselect.{$params.selectType}'),
                 fieldTpl: {if $params.fieldTpl}'{$params.fieldTpl}'{else}{literal}'{title} ({id})'{/literal}{/if},
                 maxElements: ({$params.maxElements * 1}) || 0,
-                pageSize: ({$params.pageSize * 1}) || 10,
+                {if $params.pageSize}pageSize: ({$params.pageSize * 1}),{/if}
                 store: tv{$tv->id}store,
                 tvid: '{$tv->id}',
                 value: '{$value}'{literal}
@@ -41,7 +41,7 @@
                 fieldTpl: {if $params.fieldTpl}'{$params.fieldTpl}'{else}{literal}'{title} ({id})'{/literal}{/if},
                 fieldLabel: _('superboxselect.{$params.selectType}'),
                 maxElements: ({$params.maxElements * 1}) || 0,
-                pageSize: ({$params.pageSize * 1}) || 10,
+                {if $params.pageSize}pageSize: ({$params.pageSize * 1}),{/if}
                 store: tv{$tv->id}store,
                 tvid: '{$tv->id}',
                 value: '{$value}'{literal}

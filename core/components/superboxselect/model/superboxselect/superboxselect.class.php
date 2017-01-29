@@ -3,6 +3,7 @@
  * SuperBoxSelect classfile
  *
  * Copyright 2011-2016 by Benjamin Vauchel <contact@omycode.fr>
+ * Copyright 2016-2017 by Thomas Jakobi <thomas.jakobi@partout.info>
  *
  * @package superboxselect
  * @subpackage classfile
@@ -29,7 +30,7 @@ class SuperBoxSelect
      * The version
      * @var string $version
      */
-    public $version = '2.2.0';
+    public $version = '2.2.1';
 
     /**
      * The class config

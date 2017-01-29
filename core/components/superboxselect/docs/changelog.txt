@@ -1,8 +1,11 @@
 Changelog for SuperBoxSelect
 ============================
 
+- 2.2.1
+    - Fixing disabling the pagination
 - 2.2.0
     - Sort the items by drag & drop
+
 - 2.1.2
     - Fix backwards compatibility issue
 - 2.1.1
@@ -12,6 +15,7 @@ Changelog for SuperBoxSelect
     - Single value
     - Two default types (resources, users)
     - Add own package based types
+
 - 2.0.0
     - Input options for template variables
     - Pagination of the superboxselect
