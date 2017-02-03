@@ -67,6 +67,10 @@ class SuperboxselectUsersGetListProcessor extends modObjectGetListProcessor
             }
         }
 
+        if ($this->modx->getOption('superboxselect.debug', null, false)) {
+            $c->prepare();
+            $this->modx->log(xPDO::LOG_LEVEL_ERROR, $c->toSQL());
+        }
         return $c;
     }
 
