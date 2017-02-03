@@ -67,25 +67,25 @@ SuperBoxSelect.combo.SuperBoxSelectTV = Ext.extend(SuperBoxSelect.combo.SuperBox
                 ')</span>';
         }
         var _this = this;
-        var item = document.querySelectorAll("#" + this.outerWrapEl.id + " ul")[0];
+        var item = document.querySelectorAll('#' + this.outerWrapEl.id + ' ul')[0];
         if (item) {
-            item.setAttribute("data-xcomponentid", this.id);
+            item.setAttribute('data-xcomponentid', this.id);
             new Sortable(item, {
                 onEnd: function (evt) {
                     if (evt.currentTarget) {
-                        var cmpId = evt.currentTarget.getAttribute("data-xcomponentid");
+                        var cmpId = evt.currentTarget.getAttribute('data-xcomponentid');
                         var cmp = Ext.getCmp(cmpId);
                         if (cmp) {
                             _this.refreshSorting(cmp);
                             MODx.fireResourceFormChange();
                         } else {
-                            console.log("Unable to reference xComponentContext.");
+                            console.log('Unable to reference xComponentContext.');
                         }
                     }
                 }
             });
         } else {
-            console.log("Unable to find select element");
+            console.log('Unable to find select element');
         }
     },
     beforeadditem: function (bs) {
@@ -106,7 +106,7 @@ SuperBoxSelect.combo.SuperBoxSelectTV = Ext.extend(SuperBoxSelect.combo.SuperBox
     },
     refreshSorting: function (cmp) {
         var viewList = cmp.items.items;
-        var dataInputList = document.querySelectorAll("#" + cmp.outerWrapEl.dom.id + " .x-superboxselect-input");
+        var dataInputList = document.querySelectorAll('#' + cmp.outerWrapEl.dom.id + ' .x-superboxselect-input');
         var getElementIndex = function (item) {
             var nodeList = Array.prototype.slice.call(item.parentElement.children);
             return nodeList.indexOf(item);
@@ -140,7 +140,7 @@ SuperBoxSelect.combo.SuperBoxSelectTV = Ext.extend(SuperBoxSelect.combo.SuperBox
                     }
                 }
             } else {
-                console.debug("syncElementsByValue(), Unable to reference list root element.");
+                console.debug('syncElementsByValue(), Unable to reference list root element.');
                 return false;
             }
             if (callback instanceof Function) {
@@ -164,10 +164,10 @@ SuperBoxSelect.combo.SuperBoxSelectTV = Ext.extend(SuperBoxSelect.combo.SuperBox
     },
     getElementComponentContext: function (el) {
         var parentClassList = Array.prototype.slice.call(el.classList);
-        if (el.tagName != "body") {
+        if (el.tagName !== 'body') {
             return null;
         }
-        if (parentClassList.indexOf("x-superboxselect")) {
+        if (parentClassList.indexOf('x-superboxselect')) {
             return el;
         } else {
             getElementComponentContext(el.parentElement);

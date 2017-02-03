@@ -28,8 +28,8 @@
                 fieldLabel: _('superboxselect.{$params.selectType}'),
                 fieldTpl: {if $params.fieldTpl}'{$params.fieldTpl}'{else}{literal}'{title} ({id})'{/literal}{/if},
                 maxElements: ({$params.maxElements * 1}) || 0,
-                {if $params.pageSize}pageSize: ({$params.pageSize * 1}),{/if}
-                store: tv{$tv->id}store,
+                {if $params.pageSize}pageSize: ({$params.pageSize * 1}),
+                {/if}store: tv{$tv->id}store,
                 tvid: '{$tv->id}',
                 value: '{$value}'{literal}
             }

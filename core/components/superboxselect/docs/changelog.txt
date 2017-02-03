@@ -1,6 +1,8 @@
 Changelog for SuperBoxSelect
 ============================
 
+- 2.2.2
+    - Fixing limit to related context option
 - 2.2.1
     - Fixing disabling the pagination
 - 2.2.0
