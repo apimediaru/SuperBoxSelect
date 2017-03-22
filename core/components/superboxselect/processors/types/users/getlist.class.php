@@ -36,15 +36,8 @@ class SuperboxselectUsersGetListProcessor extends modObjectGetListProcessor
     public function prepareQueryBeforeCount(xPDOQuery $c)
     {
         // Get Properties
-        $id = $this->getProperty('id');
         $allowedUsergroups = $this->getProperty('allowedUsergroups');
         $deniedUsergroups = $this->getProperty('deniedUsergroups');
-
-        if (!empty($id)) {
-            $c->where(array(
-                'id:IN' => array_map('intval', explode('|', $id))
-            ));
-        }
 
         $c->select($this->modx->getSelectColumns('modUser', 'modUser', '', array('id', 'username')));
 
@@ -60,10 +53,12 @@ class SuperboxselectUsersGetListProcessor extends modObjectGetListProcessor
             }
             if ($deniedUsergroups) {
                 $deniedUsergroups = explode(',', $deniedUsergroups);
-                $c->where(array(array(
-                    'modUserGroup.name:NOT IN' => $deniedUsergroups,
-                    'OR:modUserGroup.name:IS' => null
-                )));
+                $c->where(array(
+                    array(
+                        'modUserGroup.name:NOT IN' => $deniedUsergroups,
+                        'OR:modUserGroup.name:IS' => null
+                    )
+                ));
             }
         }
 
@@ -71,6 +66,22 @@ class SuperboxselectUsersGetListProcessor extends modObjectGetListProcessor
             $c->prepare();
             $this->modx->log(xPDO::LOG_LEVEL_ERROR, $c->toSQL());
         }
+        return $c;
+    }
+
+    /**
+     * @param xPDOQuery $c
+     * @return xPDOQuery
+     */
+    public function prepareQueryAfterCount(xPDOQuery $c)
+    {
+        $id = $this->getProperty('id');
+        if (!empty($id)) {
+            $c->where(array(
+                'id:IN' => array_map('intval', explode('|', $id))
+            ));
+        }
+        $c->sortby('pagetitle', 'ASC');
         return $c;
     }
 
