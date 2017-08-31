@@ -56,11 +56,6 @@ class SuperBoxSelect
         $this->config = array_merge(array(
             'namespace' => $this->namespace,
             'version' => $this->version,
-            'assetsPath' => $assetsPath,
-            'assetsUrl' => $assetsUrl,
-            'cssUrl' => $assetsUrl . 'css/',
-            'jsUrl' => $assetsUrl . 'js/',
-            'imagesUrl' => $assetsUrl . 'images/',
             'corePath' => $corePath,
             'modelPath' => $corePath . 'model/',
             'vendorPath' => $corePath . 'vendor/',
@@ -71,7 +66,12 @@ class SuperBoxSelect
             'controllersPath' => $corePath . 'controllers/',
             'processorsPath' => $corePath . 'processors/',
             'templatesPath' => $corePath . 'templates/',
-            'connectorUrl' => $assetsUrl . 'connector.php',
+            'assetsPath' => $assetsPath,
+            'assetsUrl' => $assetsUrl,
+            'jsUrl' => $assetsUrl . 'js/',
+            'cssUrl' => $assetsUrl . 'css/',
+            'imagesUrl' => $assetsUrl . 'images/',
+            'connectorUrl' => $assetsUrl . 'connector.php'
         ), $config);
 
         // Set default options
@@ -120,14 +120,14 @@ class SuperBoxSelect
         $cssSourceUrl = $assetsUrl . '../../../source/css/mgr/';
 
         if ($this->getOption('debug') && ($assetsUrl != MODX_ASSETS_URL . 'components/superboxselect/')) {
-            $this->modx->controller->addCss($cssSourceUrl . 'superboxselect.css');
+            $this->modx->controller->addCss($cssSourceUrl . 'superboxselect.css?v=v' . $this->version);
             $this->modx->controller->addJavascript($jsSourceUrl . 'vendor/Sortable.js?v=v' . $this->version);
             $this->modx->controller->addJavascript($jsSourceUrl . 'superboxselect.js?v=v' . $this->version);
             $this->modx->controller->addJavascript($jsSourceUrl . 'superboxselect.panel.inputoptions.js?v=v' . $this->version);
             $this->modx->controller->addJavascript($jsSourceUrl . 'superboxselect.combo.templatevar.js?v=v' . $this->version);
             $this->modx->controller->addJavascript($jsSourceUrl . 'superboxselect.renderer.js?v=v' . $this->version);
         } else {
-            $this->modx->controller->addCss($cssUrl . 'superboxselect.min.css');
+            $this->modx->controller->addCss($cssUrl . 'superboxselect.min.css?v=v' . $this->version);
             $this->modx->controller->addJavascript($jsUrl . 'superboxselect.min.js?v=v' . $this->version);
         }
 
