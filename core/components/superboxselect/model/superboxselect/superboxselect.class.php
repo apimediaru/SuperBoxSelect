@@ -204,7 +204,7 @@ class SuperBoxSelect
                     'package' => $package
                 ))
             ));
-            if ($response) {
+            if (!$response->isError()) {
                 $types[] = $response->response['type'];
             }
         }

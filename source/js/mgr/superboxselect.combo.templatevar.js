@@ -116,7 +116,7 @@ SuperBoxSelect.combo.SuperBoxSelectTV = Ext.extend(SuperBoxSelect.combo.SuperBox
         };
         var getElementByValue = function (val, list) {
             for (var i = 0; i < list.length; i += 1) {
-                if (list[i].value == val) {
+                if (list[i].value === val) {
                     return list[i];
                 }
             }
