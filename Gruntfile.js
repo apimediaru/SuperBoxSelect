@@ -152,6 +152,12 @@ module.exports = function (grunt) {
                     'source/**/*.scss'
                 ],
                 tasks: ['sass', 'cssmin', 'usebanner:css', 'sftp:css']
+            },
+            config: {
+                files: [
+                    '_build/config.json'
+                ],
+                tasks: ['default']
             }
         },
         bump: {
