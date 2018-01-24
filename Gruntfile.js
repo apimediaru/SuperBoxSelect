@@ -8,20 +8,6 @@ module.exports = function (grunt) {
         ' * Version: <%= modx.version %>\n' +
         ' * Build date: <%= grunt.template.today("yyyy-mm-dd") %>\n' +
         ' */\n',
-        bowercopy: {
-            options: {
-                clean: false,
-                report: false
-            },
-            vendor: {
-                options: {
-                    destPrefix: 'source/js/mgr/vendor'
-                },
-                files: {
-                    'Sortable.js': 'Sortable/Sortable.js'
-                }
-            }
-        },
         usebanner: {
             css: {
                 options: {
@@ -51,7 +37,7 @@ module.exports = function (grunt) {
         uglify: {
             mgr: {
                 src: [
-                    'source/js/mgr/vendor/Sortable.js',
+                    'node_modules/sortablejs/Sortable.js',
                     'source/js/mgr/superboxselect.js',
                     'source/js/mgr/superboxselect.panel.inputoptions.js',
                     'source/js/mgr/superboxselect.combo.templatevar.js',
@@ -189,14 +175,13 @@ module.exports = function (grunt) {
     });
 
     //load the packages
-    grunt.loadNpmTasks('grunt-bowercopy');
-    grunt.loadNpmTasks('grunt-contrib-uglify');
-    grunt.loadNpmTasks('grunt-contrib-cssmin');
-    grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-banner');
-    grunt.loadNpmTasks('grunt-ssh');
-    grunt.loadNpmTasks('grunt-sass');
+    grunt.loadNpmTasks('grunt-contrib-cssmin');
+    grunt.loadNpmTasks('grunt-contrib-uglify');
+    grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-postcss');
+    grunt.loadNpmTasks('grunt-sass');
+    grunt.loadNpmTasks('grunt-ssh');
     grunt.loadNpmTasks('grunt-string-replace');
     grunt.renameTask('string-replace', 'bump');
 

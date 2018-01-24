@@ -28,7 +28,7 @@ SuperBoxSelect.panel.InputOptions = function (config) {
             anchor: '100%',
             url: SuperBoxSelect.config.connectorUrl,
             baseParams: {
-                action: 'mgr/selecttypes/getList',
+                action: 'mgr/selecttypes/getlist',
                 tvId: MODx.request.id,
                 package: this.params.selectPackage || ''
             },
