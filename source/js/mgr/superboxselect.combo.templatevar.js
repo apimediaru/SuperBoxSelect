@@ -45,6 +45,7 @@ SuperBoxSelect.combo.SuperBoxSelectTV = function (config) {
         msgTarget: 'title',
         name: 'tv' + this.tvid + '[]',
         pageSize: this.options.pageSize,
+        stackItems: this.options.stackItems,
         queryDelay: 0,
         store: this.options.store,
         styleField: 'style',

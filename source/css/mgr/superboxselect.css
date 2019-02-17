@@ -12,7 +12,8 @@
 }
 
 .superboxselect-tv .x-superboxselect-btns .x-superboxselect-btn-clear:before, .superboxselect-tv .x-superboxselect-btns .x-superboxselect-btn-expand:before {
-  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
   content: "";
   font-size: 14px;
   margin-top: -7px;
@@ -23,6 +24,7 @@
   right: 0;
   text-align: center;
   width: 30px;
+  -webkit-transition: opacity 0.25s;
   transition: opacity 0.25s;
   display: inline-block;
   font-family: FontAwesome;

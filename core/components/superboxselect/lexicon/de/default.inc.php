@@ -22,14 +22,11 @@ $_lang['superboxselect.selectPackage'] = 'Package';
 $_lang['superboxselect.selectPackage_desc'] = 'Name des Ordners eines Packages, in dem sich die "Typ" List Prozessoren befinden.';
 $_lang['superboxselect.selectType'] = 'Typ';
 $_lang['superboxselect.selectType_desc'] = 'Inhaltstyp der Dropdown-Liste.';
+$_lang['superboxselect.stackItems'] = 'Elemente Stapeln';
+$_lang['superboxselect.stackItems_desc'] = 'Wenn aktiviert, werden die SuperBoxSelect-Elemente gestapelt angezeigt. Standardmäßig werden die Elemente in der Reihe angezeigt.';
 
 $_lang['superboxselect.maxElements_label'] = 'max. {maxElements}';
 $_lang['superboxselect.maxElements_msg'] = 'Maximale Anzahl von Elementen erreicht.';
 
 $_lang['superboxselect.resources'] = 'Ressourcen';
 $_lang['superboxselect.users'] = 'Benutzer';
-
-$_lang['setting_superboxselect.advanced'] = 'Erweitert';
-$_lang['setting_superboxselect.advanced_desc'] = 'Erweiterte TV-Einstellungen anzeigen (z.B. Package und Feld Template).';
-$_lang['setting_superboxselect.debug'] = 'Debug';
-$_lang['setting_superboxselect.debug_desc'] = 'Debug-Informationen im MODX Fehlerprotokoll ausgeben.';

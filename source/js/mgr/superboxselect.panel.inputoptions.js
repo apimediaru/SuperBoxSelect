@@ -111,7 +111,7 @@ SuperBoxSelect.panel.InputOptions = function (config) {
             name: 'inopt_allowBlank',
             hiddenName: 'inopt_allowBlank',
             id: 'inopt_allowBlank',
-            value: this.params.allowBlank == 0 || this.params.allowBlank == 'false' ? 0 : 1,
+            value: this.params.allowBlank === 0 || this.params.allowBlank === 'false' ? 0 : 1,
             anchor: '100%',
             listeners: {
                 change: {
@@ -123,6 +123,26 @@ SuperBoxSelect.panel.InputOptions = function (config) {
             xtype: MODx.expandHelp ? 'label' : 'hidden',
             forId: 'inopt_allowBlank',
             html: _('required_desc'),
+            cls: 'desc-under'
+        }, {
+            xtype: 'combo-boolean',
+            fieldLabel: _('superboxselect.stackItems'),
+            description: MODx.expandHelp ? '' : _('superboxselect.stackItems_desc'),
+            name: 'inopt_stackItems',
+            hiddenName: 'inopt_stackItems',
+            id: 'inopt_stackItems',
+            value: this.params.stackItems === 1 || this.params.stackItems === 'true' ? 1 : 0,
+            anchor: '100%',
+            listeners: {
+                change: {
+                    fn: this.markDirty,
+                    scope: this
+                }
+            }
+        }, {
+            xtype: MODx.expandHelp ? 'label' : 'hidden',
+            forId: 'inopt_stackItems',
+            html: _('superboxselect.stackItems_desc')   ,
             cls: 'desc-under'
         }, {
             xtype: 'superboxselect-panel-inputoptions-types',

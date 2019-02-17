@@ -68,7 +68,7 @@ SuperBoxSelect.panel.InputOptionsResources = function (config) {
                 name: 'inopt_limitRelatedContext',
                 hiddenName: 'inopt_limitRelatedContext',
                 id: 'inopt_limitRelatedContext',
-                value: this.params.limitRelatedContext == 1 || this.params.limitRelatedContext == 'true' ? 1 : 0,
+                value: this.params.limitRelatedContext === 1 || this.params.limitRelatedContext === 'true' ? 1 : 0,
                 anchor: '100%',
                 listeners: {
                     change: {
