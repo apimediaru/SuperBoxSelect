@@ -63,7 +63,7 @@ module.exports = function (grunt) {
                 outputStyle: 'expanded',
                 sourcemap: false
             },
-            dist: {
+            mgr: {
                 files: {
                     'source/css/mgr/superboxselect.css': 'source/sass/mgr/superboxselect.scss'
                 }
@@ -78,18 +78,34 @@ module.exports = function (grunt) {
                     })
                 ]
             },
-            dist: {
+            mgr: {
                 src: [
                     'source/css/mgr/superboxselect.css'
                 ]
             }
         },
         cssmin: {
-            superboxselect: {
+            mgr: {
                 src: [
                     'source/css/mgr/superboxselect.css'
                 ],
                 dest: 'assets/components/superboxselect/css/mgr/superboxselect.min.css'
+            }
+        },
+        imagemin: {
+            png: {
+                options: {
+                    optimizationLevel: 7
+                },
+                files: [
+                    {
+                        expand: true,
+                        cwd: 'source/img/',
+                        src: ['**/*.png'],
+                        dest: 'assets/components/superboxselect/img/',
+                        ext: '.png'
+                    }
+                ]
             }
         },
         watch: {
@@ -136,6 +152,18 @@ module.exports = function (grunt) {
                         replacement: 'version = \'' + '<%= modx.version %>' + '\''
                     }]
                 }
+            },
+            inputoptions: {
+                files: [{
+                    src: 'source/js/mgr/superboxselect.panel.inputoptions.js',
+                    dest: 'source/js/mgr/superboxselect.panel.inputoptions.js'
+                }],
+                options: {
+                    replacements: [{
+                        pattern: /&copy; \d{4}(-\d{4})?/g,
+                        replacement: '&copy; ' + (new Date().getFullYear() > 2013 ? '2013-' : '') + new Date().getFullYear()
+                    }]
+                }
             }
         }
     });
@@ -143,6 +171,7 @@ module.exports = function (grunt) {
     //load the packages
     grunt.loadNpmTasks('grunt-banner');
     grunt.loadNpmTasks('grunt-contrib-cssmin');
+    grunt.loadNpmTasks('grunt-contrib-imagemin');
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-postcss');
