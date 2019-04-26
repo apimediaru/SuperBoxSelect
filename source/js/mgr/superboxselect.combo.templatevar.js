@@ -112,9 +112,6 @@ SuperBoxSelect.combo.SuperBoxSelectTV = Ext.extend(SuperBoxSelect.combo.SuperBox
             var nodeList = Array.prototype.slice.call(item.parentElement.children);
             return nodeList.indexOf(item);
         };
-        var getElementByIndex = function (index) {
-            return nodeList[index];
-        };
         var getElementByValue = function (val, list) {
             for (var i = 0; i < list.length; i += 1) {
                 if (list[i].value === val) {
@@ -132,9 +129,8 @@ SuperBoxSelect.combo.SuperBoxSelectTV = Ext.extend(SuperBoxSelect.combo.SuperBox
             var targetListRootElement = list2[0].parentElement;
             if (targetListRootElement) {
                 for (var i = 0; i < list1.length; i += 1) {
-                    var targetItemIndex;
                     var item = list1[i];
-                    var targetItem = getElementByValue(item.value, list2);
+                    var targetItem = getElementByValue(String(item.value), list2);
                     var initialTargetElement = list2[i];
                     if (targetItem !== null && initialTargetElement !== undefined) {
                         targetListRootElement.insertBefore(targetItem, initialTargetElement);

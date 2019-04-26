@@ -37,7 +37,7 @@ class SuperboxselectInputRender extends modTemplateVarInputRender
                 'package' => isset($params['selectPackage']) ? $params['selectPackage'] : ''
             ))
         ));
-        if (!$response->isError()) {
+        if (empty($response->errors)) {
             $params['fieldTpl'] = $response->response;
         }
 

@@ -30,7 +30,7 @@ class SuperBoxSelect
      * The version
      * @var string $version
      */
-    public $version = '2.3.1';
+    public $version = '2.3.2';
 
     /**
      * The class config
@@ -163,6 +163,7 @@ class SuperBoxSelect
     }
 
     /**
+     * @param $params
      * @return array
      */
     public function getProcessorsPath($params)
@@ -204,7 +205,7 @@ class SuperBoxSelect
                     'package' => $package
                 ))
             ));
-            if (!$response->isError()) {
+            if (empty($response->errors)) {
                 $types[] = $response->response['type'];
             }
         }

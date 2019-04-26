@@ -100,7 +100,7 @@ class SuperboxselectResourcesGetListProcessor extends modObjectGetListProcessor
             $valuesqry = $this->getProperty('valuesqry');
             if (!empty($valuesqry)) {
                 $c->where(array(
-                    'id:in' => explode('|', $query)
+                    'id:IN' => explode('|', $query)
                 ));
             } else {
                 $c->where(array(
@@ -118,7 +118,6 @@ class SuperboxselectResourcesGetListProcessor extends modObjectGetListProcessor
 
         if ($this->modx->getOption('superboxselect.debug', null, false)) {
             $c->prepare();
-            $test = $c->toSQL();
             $this->modx->log(xPDO::LOG_LEVEL_ERROR, $c->toSQL());
         }
         return $c;
