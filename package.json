@@ -2,6 +2,7 @@
   "name": "superboxselect",
   "description": "Advanced listbox/resource list custom template variable type",
   "author": "Thomas Jakobi <thomas.jakobi@partout.info>",
+  "private": true,
   "devDependencies": {
     "autoprefixer": "^9.5.1",
     "grunt": "^1.0.4",
@@ -18,5 +19,12 @@
   },
   "dependencies": {
     "sortablejs": "^1.9.0"
-  }
+  },
+  "browserslist": [
+    "last 2 version",
+    "> 1%",
+    "maintained node versions",
+    "not dead",
+    "ie >= 8"
+  ]
 }
