@@ -158,7 +158,7 @@ class SuperBoxSelect
         }
 
         $this->modx->controller->addHtml('<script type="text/javascript">'
-            . ' SuperBoxSelect.config = ' . json_encode($this->config, JSON_PRETTY_PRINT) . ';'
+            . 'SuperBoxSelect.config = ' . json_encode($this->config, JSON_PRETTY_PRINT) . ';'
             . '</script>');
     }
 
