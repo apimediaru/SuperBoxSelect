@@ -73,8 +73,8 @@ SuperBoxSelect.combo.SuperBoxSelectTV = Ext.extend(SuperBoxSelect.combo.SuperBox
             item.setAttribute('data-xcomponentid', this.id);
             new Sortable(item, {
                 onEnd: function (evt) {
-                    if (evt.currentTarget) {
-                        var cmpId = evt.currentTarget.getAttribute('data-xcomponentid');
+                    if (evt.target) {
+                        var cmpId = evt.target.getAttribute('data-xcomponentid');
                         var cmp = Ext.getCmp(cmpId);
                         if (cmp) {
                             _this.refreshSorting(cmp);
