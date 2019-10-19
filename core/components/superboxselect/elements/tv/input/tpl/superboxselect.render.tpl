@@ -14,7 +14,7 @@
                 deniedUsergroups: '{$params.deniedUsergroups}',
                 depth: '{$params.depth}',
                 {if ({!$params.pageSize})}limit: 0,
-                {/if}limitRelatedContext: {if ($params.limitRelatedContext == 1) || ($params.limitRelatedContext == 'true') }true{else}false{/if},
+                {/if}limitRelatedContext: {if ($params.limitRelatedContext === 1) || ($params.limitRelatedContext === 'true') }true{else}false{/if},
                 package: '{$params.selectPackage}',
                 parents: '{$params.parents}',
                 resource_id: '{$params.resourceId}',
@@ -29,7 +29,7 @@
                 fieldTpl: {if $params.fieldTpl}'{$params.fieldTpl}'{else}{literal}'{title} ({id})'{/literal}{/if},
                 maxElements: {($params.maxElements) ? $params.maxElements * 1 : 0},
                 {if $params.pageSize}pageSize: {$params.pageSize * 1},
-                {/if}stackItems: {if ($params.stackItems == 0) || ($params.stackItems == 'true') }true{else}false{/if},
+                {/if}stackItems: {if ($params.stackItems === 1) || ($params.stackItems === 'true') }true{else}false{/if},
                 store: tv{$tv->id}store,
                 tvid: '{$tv->id}',
                 value: '{$value}'{literal}
