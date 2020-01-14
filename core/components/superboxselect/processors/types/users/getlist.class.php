@@ -39,7 +39,21 @@ class SuperboxselectUsersGetListProcessor extends modObjectGetListProcessor
         $allowedUsergroups = $this->getProperty('allowedUsergroups');
         $deniedUsergroups = $this->getProperty('deniedUsergroups');
 
-        $c->select($this->modx->getSelectColumns('modUser', 'modUser', '', array('id', 'username')));
+        // Get query
+        $query = $this->getProperty('query');
+        if (!empty($query)) {
+            $valuesqry = $this->getProperty('valuesqry');
+            if (!empty($valuesqry)) {
+                $c->where(array(
+                    'id:IN' => explode('|', $query)
+                ));
+            } else {
+                $c->where(array(
+                    'username:LIKE' => '%' . $query . '%'
+                ));
+            }
+        }
+
         $c->select($this->modx->getSelectColumns($this->classKey, $this->classKey, '', array('id', 'username')));
 
         if ($allowedUsergroups || $deniedUsergroups) {
