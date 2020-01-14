@@ -109,7 +109,7 @@ class SuperboxselectResourcesGetListProcessor extends modObjectGetListProcessor
             }
         }
 
-        $c->select(array('id', 'pagetitle'));
+        $c->select($this->modx->getSelectColumns($this->classKey, $this->classKey, '', array('id', 'pagetitle')));
 
         $c->where(array(
             'deleted' => false,

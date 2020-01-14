@@ -1,11 +1,11 @@
 <?php
-
 /**
  * Get list processor for SuperBoxSelect TV.
  *
  * @package superboxselect
  * @subpackage processor
  */
+
 class SuperboxselectUsersGetListProcessor extends modObjectGetListProcessor
 {
     /**
@@ -40,6 +40,7 @@ class SuperboxselectUsersGetListProcessor extends modObjectGetListProcessor
         $deniedUsergroups = $this->getProperty('deniedUsergroups');
 
         $c->select($this->modx->getSelectColumns('modUser', 'modUser', '', array('id', 'username')));
+        $c->select($this->modx->getSelectColumns($this->classKey, $this->classKey, '', array('id', 'username')));
 
         if ($allowedUsergroups || $deniedUsergroups) {
             $c->leftJoin('modUserGroupMember', 'modUserGroupMember', array('modUserGroupMember.member = modUser.id'));
