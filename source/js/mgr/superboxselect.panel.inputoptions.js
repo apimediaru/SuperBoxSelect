@@ -20,7 +20,7 @@ SuperBoxSelect.panel.InputOptions = function (config) {
         items: [{
             layout: 'column',
             items: [{
-                columnWidth: .5,
+                columnWidth: (SuperBoxSelect.config.advanced) ? .5 : 1,
                 layout: 'form',
                 labelAlign: 'top',
                 items: [{
@@ -80,7 +80,7 @@ SuperBoxSelect.panel.InputOptions = function (config) {
         }, {
             layout: 'column',
             items: [{
-                columnWidth: .33,
+                columnWidth: (SuperBoxSelect.config.advanced) ? .33 : .5,
                 layout: 'form',
                 labelAlign: 'top',
                 items: [{
@@ -130,7 +130,7 @@ SuperBoxSelect.panel.InputOptions = function (config) {
                     hidden: !SuperBoxSelect.config.advanced
                 }]
             }, {
-                columnWidth: .34,
+                columnWidth: (SuperBoxSelect.config.advanced) ? .34 : .5,
                 layout: 'form',
                 labelAlign: 'top',
                 items: [{

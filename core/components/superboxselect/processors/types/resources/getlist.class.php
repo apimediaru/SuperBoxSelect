@@ -98,11 +98,7 @@ class SuperboxselectResourcesGetListProcessor extends modObjectGetListProcessor
         $query = $this->getProperty('query');
         if (!empty($query)) {
             $valuesqry = $this->getProperty('valuesqry');
-            if (!empty($valuesqry)) {
-                $c->where(array(
-                    'id:IN' => explode('|', $query)
-                ));
-            } else {
+            if (empty($valuesqry)) {
                 $c->where(array(
                     'pagetitle:LIKE' => '%' . $query . '%'
                 ));
@@ -129,13 +125,22 @@ class SuperboxselectResourcesGetListProcessor extends modObjectGetListProcessor
      */
     public function prepareQueryAfterCount(xPDOQuery $c)
     {
-        $id = $this->getProperty('id');
-        if (!empty($id)) {
+        $valuesqry = $this->getProperty('valuesqry');
+        if (!empty($valuesqry)) {
+            $query = $this->getProperty('query');
             $c->where(array(
-                'id:IN' => array_map('intval', explode('|', $id))
+                'id:IN' => explode('|', $query)
             ));
+        } else {
+            $id = $this->getProperty('id');
+            if (!empty($id)) {
+                $c->where(array(
+                    'id:IN' => array_map('intval', explode('|', $id))
+                ));
+            }
         }
         $c->sortby('pagetitle', 'ASC');
+
         return $c;
     }
 
