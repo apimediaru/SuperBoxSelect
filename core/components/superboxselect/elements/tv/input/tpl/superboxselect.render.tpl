@@ -21,7 +21,7 @@
                 where: '{$params.where}'{literal}
             }
         });{/literal}
-        {if $params.maxElements != 1 } {literal}
+        {if $params.maxElements != 1} {literal}
         new SuperBoxSelect.combo.SuperBoxSelectTV({
             options: { {/literal}
                 allowBlank: {if $params.allowBlank === 1 || $params.allowBlank === 'true'}true{else}false{/if},

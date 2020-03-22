@@ -30,6 +30,18 @@ class SuperboxselectUsersGetListProcessor extends modObjectGetListProcessor
     public $objectType = 'superboxselect.users';
 
     /**
+     * @return bool
+     */
+    public function beforeQuery()
+    {
+        $valuesqry = $this->getProperty('valuesqry');
+        if (!empty($valuesqry)) {
+            $this->setProperty('limit', 0);
+        }
+        return true;
+    }
+
+    /**
      * @param xPDOQuery $c
      * @return xPDOQuery
      */
@@ -45,7 +57,7 @@ class SuperboxselectUsersGetListProcessor extends modObjectGetListProcessor
             $valuesqry = $this->getProperty('valuesqry');
             if (!empty($valuesqry)) {
                 $c->where(array(
-                    'id:IN' => explode('|', $query)
+                    'id:IN' => explode('||', $query)
                 ));
             } else {
                 $c->where(array(
@@ -77,6 +89,15 @@ class SuperboxselectUsersGetListProcessor extends modObjectGetListProcessor
             }
         }
 
+        // Exclude original value
+        $originalValue = $this->getProperty('originalValue');
+        if ($originalValue) {
+            $originalValue = array_map('trim', explode('||', $originalValue));
+            $c->where(array(
+                'id:NOT IN' => $originalValue
+            ));
+        }
+
         if ($this->modx->getOption('superboxselect.debug', null, false)) {
             $c->prepare();
             $this->modx->log(xPDO::LOG_LEVEL_ERROR, $c->toSQL());
@@ -93,7 +114,7 @@ class SuperboxselectUsersGetListProcessor extends modObjectGetListProcessor
         $id = $this->getProperty('id');
         if (!empty($id)) {
             $c->where(array(
-                'id:IN' => array_map('intval', explode('|', $id))
+                'id:IN' => array_map('intval', explode('||', $id))
             ));
         }
         $c->sortby($this->getProperty('defaultSortField'), $this->getProperty('defaultSortDirection'));

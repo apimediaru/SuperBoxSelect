@@ -4,9 +4,9 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [2.4.0] - TBD
+## [2.4.0] - 2020-03-22
 ### Added
-- Allow other values to be saved in the SuperBoxSelect as the resource id
+- Allow other values to be saved in the SuperBoxSelect than the resource id
 ### Changed
 - Restore pageSize for multi selects disabled in SuperBoxSelect 2.3.8
 - Fix showing 'The changes you made may not be saved' alert, even when the SuperBoxSelect value was not changed.

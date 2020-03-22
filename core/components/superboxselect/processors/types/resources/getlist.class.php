@@ -55,6 +55,7 @@ class SuperboxselectResourcesGetListProcessor extends modObjectGetListProcessor
         $parents = $this->getProperty('parents', '0');
         $parents = ($parents) ? explode(',', $parents) : array();
         $depth = $this->getProperty('depth', 10);
+        $valueField = $this->getProperty('valueField', 'id');
 
         if ($where) {
             $where = json_decode($where, true);
@@ -117,7 +118,15 @@ class SuperboxselectResourcesGetListProcessor extends modObjectGetListProcessor
             }
         }
 
-        $valueField = $this->getProperty('valueField', 'id');
+        // Exclude original value
+        $originalValue = $this->getProperty('originalValue');
+        if ($originalValue) {
+            $originalValue = array_map('trim', explode('||', $originalValue));
+            $c->where(array(
+                $valueField . ':NOT IN' => $originalValue
+            ));
+        }
+
         $columns = (in_array($valueField, $this->modx->getFields($this->classKey))) ? array('id', $valueField, 'pagetitle') : array('id', 'pagetitle');
         $c->select($this->modx->getSelectColumns($this->classKey, $this->classKey, '', $columns));
 
