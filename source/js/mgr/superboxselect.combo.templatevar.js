@@ -100,7 +100,9 @@ SuperBoxSelect.combo.SuperBoxSelectTV = Ext.extend(SuperBoxSelect.combo.SuperBox
         }
     },
     additem: function () {
-        MODx.fireResourceFormChange();
+        if (this.originalValue) {
+            MODx.fireResourceFormChange();
+        }
     },
     removeitem: function () {
         MODx.fireResourceFormChange();

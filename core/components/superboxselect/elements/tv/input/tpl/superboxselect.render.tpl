@@ -10,14 +10,14 @@
             baseParams: {{/literal}
                 action: 'types/{$params.selectType}/getlist',
                 allowedUsergroups: '{$params.allowedUsergroups}',
-                context_key: '{$params.contextKey}',
+                contextKey: '{$params.contextKey}',
                 deniedUsergroups: '{$params.deniedUsergroups}',
                 depth: '{$params.depth}',
-                {if ({$params.pageSize && $params.maxElements != 1})}limit: 0,
-                {/if}limitRelatedContext: {if ($params.limitRelatedContext === 1) || ($params.limitRelatedContext === 'true') }true{else}false{/if},
+                limitRelatedContext: {if ($params.limitRelatedContext === 1) || ($params.limitRelatedContext === 'true') }true{else}false{/if},
                 package: '{$params.selectPackage}',
                 parents: '{$params.parents}',
-                resource_id: '{$params.resourceId}',
+                resourceId: '{$params.resourceId}',
+                valueField: '{$params.valueField}' || 'id',
                 where: '{$params.where}'{literal}
             }
         });{/literal}
@@ -29,7 +29,8 @@
                 fieldTpl: {if $params.fieldTpl}'{$params.fieldTpl}'{else}{literal}'{title} ({id})'{/literal}{/if},
                 maxElements: {($params.maxElements) ? $params.maxElements * 1 : 0},
                 stackItems: {if ($params.stackItems === 1) || ($params.stackItems === 'true') }true{else}false{/if},
-                store: tv{$tv->id}store,
+                {if $params.pageSize}pageSize: {$params.pageSize * 1},
+                {/if}store: tv{$tv->id}store,
                 tvid: '{$tv->id}',
                 value: '{$value}'{literal}
             }

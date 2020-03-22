@@ -4,6 +4,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.4.0] - TBD
+### Added
+- Allow other values to be saved in the SuperBoxSelect as the resource id
+### Changed
+- Restore pageSize for multi selects disabled in SuperBoxSelect 2.3.8
+- Fix showing 'The changes you made may not be saved' alert, even when the SuperBoxSelect value was not changed.
+
 ## [2.3.8] - 2020-01-28
 ### Changed
 - Fix a limit/pageSize issue
@@ -39,7 +46,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Use less space in input options
 
 ## [2.3.0] - 2019-02-17
-### Changed
+### Added
 - Enable stacking of the SuperBoxSelect values per template variable option
 
 ## [2.2.2] - 2017-02-03
