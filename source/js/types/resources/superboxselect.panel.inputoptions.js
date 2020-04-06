@@ -83,7 +83,7 @@ SuperBoxSelect.panel.InputOptionsResources = function (config) {
                         description: MODx.expandHelp ? '' : _('superboxselect.valueField_desc'),
                         name: 'inopt_valueField',
                         id: 'inopt_valueField',
-                        value: this.params.valueField || 10,
+                        value: this.params.valueField || '',
                         anchor: '100%',
                         listeners: {
                             change: {
