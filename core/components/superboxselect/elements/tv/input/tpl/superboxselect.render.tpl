@@ -13,7 +13,7 @@
                 contextKey: '{$params.contextKey}',
                 deniedUsergroups: '{$params.deniedUsergroups}',
                 depth: '{$params.depth}',
-                limitRelatedContext: {if ($params.limitRelatedContext === 1) || ($params.limitRelatedContext === 'true') }true{else}false{/if},
+                limitRelatedContext: {if ($params.limitRelatedContext == 1) || ($params.limitRelatedContext == 'true') }true{else}false{/if},
                 package: '{$params.selectPackage}',
                 parents: '{$params.parents}',
                 resourceId: '{$params.resourceId}',
@@ -24,11 +24,11 @@
         {if $params.maxElements != 1} {literal}
         new SuperBoxSelect.combo.SuperBoxSelectTV({
             options: { {/literal}
-                allowBlank: {if $params.allowBlank === 1 || $params.allowBlank === 'true'}true{else}false{/if},
+                allowBlank: {if $params.allowBlank == 1 || $params.allowBlank == 'true'}true{else}false{/if},
                 fieldLabel: _('superboxselect.{$params.selectType}'),
                 fieldTpl: {if $params.fieldTpl}'{$params.fieldTpl}'{else}{literal}'{title} ({id})'{/literal}{/if},
                 maxElements: {($params.maxElements) ? $params.maxElements * 1 : 0},
-                stackItems: {if ($params.stackItems === 1) || ($params.stackItems === 'true') }true{else}false{/if},
+                stackItems: {if ($params.stackItems == 1) || ($params.stackItems == 'true') }true{else}false{/if},
                 {if $params.pageSize}pageSize: {$params.pageSize * 1},
                 {/if}store: tv{$tv->id}store,
                 tvid: '{$tv->id}',
@@ -38,7 +38,7 @@
         {else} {literal}
         new SuperBoxSelect.combo.SuperBoxSelectTVSingle({
             options: { {/literal}
-                allowBlank: {if $params.allowBlank === 1 || $params.allowBlank === 'true'}true{else}false{/if},
+                allowBlank: {if $params.allowBlank == 1 || $params.allowBlank == 'true'}true{else}false{/if},
                 fieldTpl: {if $params.fieldTpl}'{$params.fieldTpl}'{else}{literal}'{title} ({id})'{/literal}{/if},
                 fieldLabel: _('superboxselect.{$params.selectType}'),
                 maxElements: {($params.maxElements) ? $params.maxElements * 1 : 0},
