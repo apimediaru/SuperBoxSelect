@@ -4,9 +4,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.4.2] - TBA
+### Changed
+- Fix retrieving resrources from a different context deeper than one level [#24].
+
 ## [2.4.1] - 2020-08-26
 ### Changed
-- Fix not working boolean template variable options.
+- Fix not working boolean template variable options [#23].
 
 ## [2.4.0] - 2020-03-22
 ### Added
