@@ -96,7 +96,12 @@ class SuperboxselectResourcesGetListProcessor extends modObjectGetListProcessor
                 if (!empty($limitRelatedContext) && ($limitRelatedContext == 1 || $limitRelatedContext == 'true')) {
                     $pchildren = $this->modx->getChildIds($parent, $depth, array('context' => $contextKey));
                 } else {
-                    $pchildren = $this->modx->getChildIds($parent, $depth);
+                    $parentObject = $this->modx->getObject('modResource', $parent);
+                    if ($parentObject) {
+                        $pchildren = $this->modx->getChildIds($parent, $depth, array('context' => $parentObject->get('context_key')));
+                    } else {
+                        $pchildren = array();
+                    }
                 }
                 if (!empty($pchildren)) {
                     $children = array_merge($children, $pchildren);

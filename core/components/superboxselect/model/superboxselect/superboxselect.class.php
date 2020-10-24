@@ -30,7 +30,7 @@ class SuperBoxSelect
      * The version
      * @var string $version
      */
-    public $version = '2.4.1';
+    public $version = '2.4.1-pl2';
 
     /**
      * The class config
