@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [2.4.2] - TBA
 ### Changed
 - Fix retrieving resrources from a different context deeper than one level [#24].
+- Prevent E_NOTICE errors from smarty.
+- Fix drag & drop issues [#25].
 
 ## [2.4.1] - 2020-08-26
 ### Changed

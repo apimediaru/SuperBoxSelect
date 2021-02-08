@@ -74,19 +74,17 @@ SuperBoxSelect.combo.SuperBoxSelectTV = Ext.extend(SuperBoxSelect.combo.SuperBox
         if (item) {
             item.setAttribute('data-xcomponentid', this.id);
             new Sortable(item, {
-                onEnd: {
-                    fn: function (evt) {
-                        if (evt.target) {
-                            var cmpId = evt.target.getAttribute('data-xcomponentid');
-                            var cmp = Ext.getCmp(cmpId);
-                            if (cmp) {
-                                _this.refreshSorting(cmp);
-                                this.fireResourceFormChange();
-                            } else {
-                                console.log('Unable to reference xComponentContext.');
-                            }
+                onEnd: function (evt) {
+                    if (evt.target) {
+                        var cmpId = evt.target.getAttribute('data-xcomponentid');
+                        var cmp = Ext.getCmp(cmpId);
+                        if (cmp) {
+                            _this.refreshSorting(cmp);
+                            _this.fireResourceFormChange();
+                        } else {
+                            console.log('Unable to reference xComponentContext.');
                         }
-                    }, scope: this
+                    }
                 }
             });
         } else {

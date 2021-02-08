@@ -8,28 +8,28 @@
             fields: ['id', 'title'],{/literal}
             url: '{$connector}',{literal}
             baseParams: {{/literal}
-                action: 'types/{$params.selectType}/getlist',
-                allowedUsergroups: '{$params.allowedUsergroups}',
-                contextKey: '{$params.contextKey}',
-                deniedUsergroups: '{$params.deniedUsergroups}',
-                depth: '{$params.depth}',
-                limitRelatedContext: {if ($params.limitRelatedContext == 1) || ($params.limitRelatedContext == 'true') }true{else}false{/if},
-                package: '{$params.selectPackage}',
-                parents: '{$params.parents}',
-                resourceId: '{$params.resourceId}',
-                valueField: '{$params.valueField}' || 'id',
-                where: '{$params.where}'{literal}
+                action: 'types/{$params.selectType|default}/getlist',
+                allowedUsergroups: '{$params.allowedUsergroups|default}',
+                contextKey: '{$params.contextKey|default}',
+                deniedUsergroups: '{$params.deniedUsergroups|default}',
+                depth: '{$params.depth|default}',
+                limitRelatedContext: {if ($params.limitRelatedContext|default == 1) || ($params.limitRelatedContext|default == 'true') }true{else}false{/if},
+                package: '{$params.selectPackage|default}',
+                parents: '{$params.parents|default}',
+                resourceId: '{$params.resourceId|default}',
+                valueField: '{$params.valueField|default}' || 'id',
+                where: '{$params.where|default}'{literal}
             }
         });{/literal}
-        {if $params.maxElements != 1} {literal}
+        {if $params.maxElements|default != 1} {literal}
         new SuperBoxSelect.combo.SuperBoxSelectTV({
             options: { {/literal}
-                allowBlank: {if $params.allowBlank == 1 || $params.allowBlank == 'true'}true{else}false{/if},
-                fieldLabel: _('superboxselect.{$params.selectType}'),
-                fieldTpl: {if $params.fieldTpl}'{$params.fieldTpl}'{else}{literal}'{title} ({id})'{/literal}{/if},
-                maxElements: {($params.maxElements) ? $params.maxElements * 1 : 0},
-                stackItems: {if ($params.stackItems == 1) || ($params.stackItems == 'true') }true{else}false{/if},
-                {if $params.pageSize}pageSize: {$params.pageSize * 1},
+                allowBlank: {if $params.allowBlank|default == 1 || $params.allowBlank|default == 'true'}true{else}false{/if},
+                fieldLabel: _('superboxselect.{$params.selectType|default}'),
+                fieldTpl: {if $params.fieldTpl|default}'{$params.fieldTpl|default}'{else}{literal}'{title} ({id})'{/literal}{/if},
+                maxElements: {($params.maxElements|default) ? $params.maxElements|default * 1 : 0},
+                stackItems: {if ($params.stackItems|default == 1) || ($params.stackItems|default == 'true') }true{else}false{/if},
+                {if $params.pageSize|default}pageSize: {$params.pageSize|default * 1},
                 {/if}store: tv{$tv->id}store,
                 tvid: '{$tv->id}',
                 value: '{$value}'{literal}
@@ -38,11 +38,11 @@
         {else} {literal}
         new SuperBoxSelect.combo.SuperBoxSelectTVSingle({
             options: { {/literal}
-                allowBlank: {if $params.allowBlank == 1 || $params.allowBlank == 'true'}true{else}false{/if},
-                fieldTpl: {if $params.fieldTpl}'{$params.fieldTpl}'{else}{literal}'{title} ({id})'{/literal}{/if},
-                fieldLabel: _('superboxselect.{$params.selectType}'),
-                maxElements: {($params.maxElements) ? $params.maxElements * 1 : 0},
-                {if $params.pageSize}pageSize: {$params.pageSize * 1},
+                allowBlank: {if $params.allowBlank|default == 1 || $params.allowBlank|default == 'true'}true{else}false{/if},
+                fieldTpl: {if $params.fieldTpl|default}'{$params.fieldTpl|default}'{else}{literal}'{title} ({id})'{/literal}{/if},
+                fieldLabel: _('superboxselect.{$params.selectType|default}'),
+                maxElements: {($params.maxElements|default) ? $params.maxElements|default * 1 : 0},
+                {if $params.pageSize|default}pageSize: {$params.pageSize|default * 1},
                 {/if}store: tv{$tv->id}store,
                 tvid: '{$tv->id}',
                 value: '{$value}'{literal}
