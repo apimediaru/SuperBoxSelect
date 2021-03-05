@@ -14,7 +14,7 @@ class SuperboxselectSelecttypesGetListProcessor extends modProcessor
     {
         $corePath = $this->modx->getOption('superboxselect.core_path', null, $this->modx->getOption('core_path') . 'components/superboxselect/');
         /** @var SuperBoxSelect $superboxselect */
-        $superboxselect = $this->modx->getService('superboxselect', 'SuperBoxSelect', $corePath . '/model/superboxselect/', array(
+        $superboxselect = $this->modx->getService('superboxselect', 'SuperBoxSelect', $corePath . 'model/superboxselect/', array(
             'core_path' => $corePath
         ));
 
