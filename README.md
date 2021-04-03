@@ -1,4 +1,4 @@
-[![Crowdin](https://d322cqt584bo4o.cloudfront.net/superboxselect/localized.svg)](https://crowdin.com/project/superboxselect)
+[![Weblate](https://hosted.weblate.org/widgets/modx-superboxselect/-/svg-badge.svg)](https://hosted.weblate.org/engage/modx-superboxselect/)
 
 # SuperBoxSelect
 
