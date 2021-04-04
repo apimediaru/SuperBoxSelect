@@ -5,9 +5,7 @@
  * @package superboxselect
  * @subpackage lexicon
  */
-
 $_lang['superboxselect'] = 'SuperBoxSelect';
-
 $_lang['superboxselect.allowedUsergroups'] = 'Разрешенные группы пользователей';
 $_lang['superboxselect.allowedUsergroups_desc'] = 'Разделенный запятыми список разрешенных групп пользователей';
 $_lang['superboxselect.deniedUsergroups'] = 'Запрещенные группы пользователей';
@@ -26,11 +24,8 @@ $_lang['superboxselect.stackItems'] = 'Элементы стека';
 $_lang['superboxselect.stackItems_desc'] = 'Если этот параметр включен, элементы SuperBoxSelect будут укладываться по одному в каждой строке. По умолчанию элементы отображаются в строке.';
 $_lang['superboxselect.valueField'] = 'Value Field';
 $_lang['superboxselect.valueField_desc'] = 'The name of the field whose value is stored in the template variable. Default: <code>id</code>';
-
 $_lang['superboxselect.maxElements_label'] = 'макс. {maxElements}';
 $_lang['superboxselect.maxElements_msg'] = 'Достигнуто максимальное количество элементов.';
-
 $_lang['superboxselect.resources'] = 'Ресурсы';
 $_lang['superboxselect.users'] = 'Пользователи';
-
 $_lang['superboxselect.err_wrong_package'] = 'Пакет не существует!';
