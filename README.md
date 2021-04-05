@@ -24,6 +24,10 @@ template variable types:
 
 For more information please read the [documentation](https://jako.github.io/SuperBoxSelect/).
 
+## License
+
+The project is licensed under the [GPLv2 license](https://github.com/Jako/SuperBoxSelect/blob/master/core/components/superboxselect/docs/license.md).
+
 ## Translations
 
-The project could be translated on [Crowdin](https://crowdin.com/project/superboxselect)
+The project could be translated on [Weblate](https://hosted.weblate.org/engage/modx-superboxselect/)
