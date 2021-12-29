@@ -46,4 +46,4 @@ switch ($modx->event->name) {
     case 'OnDocFormRender':
         $superboxselect->includeScriptAssets();
         break;
-};
+}
