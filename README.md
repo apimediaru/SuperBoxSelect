@@ -18,7 +18,7 @@ template variable types:
 ## Authors
 
 - Benjamin Vauchel <benjamin.vauchel@gmail.com> (until version 1.0.1-pl2)
-- Thomas Jakobi <thomas.jakobi@partout.info> (since version 2.0.0)
+- Thomas Jakobi <office@treehillstudio.com> (since version 2.0.0)
 
 ## Documentation
 

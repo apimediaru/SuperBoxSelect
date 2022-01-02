@@ -3,7 +3,7 @@
 Advanced `Listbox` / `Resource List` template variable type for MODx Revolution.
 
 - Author: Benjamin Vauchel <benjamin.vauchel@gmail.com>
-- Maintainer and further development: Thomas Jakobi <thomas.jakobi@partout.info>
+- Maintainer and further development: Thomas Jakobi <office@treehillstudio.com>
 - License: GNU GPLv2
 
 ## Features
