@@ -4,7 +4,7 @@
  * Options processor for SuperBoxSelect TV.
  *
  * @package superboxselect
- * @subpackage processor
+ * @subpackage processors
  */
 if (!class_exists('SuperboxselectOptionsProcessor')) {
     include(dirname(dirname(__FILE__)) . '/options.class.php');

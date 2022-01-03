@@ -3,7 +3,7 @@
  * Get list processor for SuperBoxSelect TV.
  *
  * @package superboxselect
- * @subpackage processor
+ * @subpackage processors
  */
 
 class SuperboxselectUsersGetListProcessor extends modObjectGetListProcessor

@@ -4,7 +4,7 @@
  * Selecttypes list processor for SuperBoxSelect TV.
  *
  * @package superboxselect
- * @subpackage processor
+ * @subpackage processors
  */
 class SuperboxselectSelecttypesGetListProcessor extends modProcessor
 {
