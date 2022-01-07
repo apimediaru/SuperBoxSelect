@@ -18,7 +18,7 @@ SuperBoxSelect.combo.SuperBoxSelectTV = function (config) {
         allowBlank: this.options.allowBlank,
         anchor: '100%',
         classField: 'cls',
-        ctCls: 'superboxselect-tv',
+        ctCls: 'superboxselect-tv modx' + SuperBoxSelect.config.modxversion,
         displayField: 'title',
         displayFieldTpl: this.options.fieldTpl,
         fieldLabel: this.options.fieldLabel,

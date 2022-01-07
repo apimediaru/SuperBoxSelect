@@ -1,33 +1,18 @@
 <?php
 /**
- * Get list processor for SuperBoxSelect TV.
+ * Get list users processor
  *
  * @package superboxselect
  * @subpackage processors
  */
 
-class SuperboxselectUsersGetListProcessor extends modObjectGetListProcessor
+use TreehillStudio\SuperBoxSelect\Processors\ObjectGetListProcessor;
+
+class SuperboxselectUsersGetListProcessor extends ObjectGetListProcessor
 {
-    /**
-     * @var string $classKey
-     */
     public $classKey = 'modUser';
-    /**
-     * @var array $languageTopics
-     */
-    public $languageTopics = array('superboxselect:default');
-    /**
-     * @var string $defaultSortField
-     */
     public $defaultSortField = 'username';
-    /**
-     * @var string $defaultSortDirection
-     */
     public $defaultSortDirection = 'ASC';
-    /**
-     * @var string $objectType
-     */
-    public $objectType = 'superboxselect.users';
 
     /**
      * @return bool
@@ -48,44 +33,54 @@ class SuperboxselectUsersGetListProcessor extends modObjectGetListProcessor
     public function prepareQueryBeforeCount(xPDOQuery $c)
     {
         // Get Properties
-        $allowedUsergroups = $this->getProperty('allowedUsergroups');
-        $deniedUsergroups = $this->getProperty('deniedUsergroups');
+        $tvid = $this->getProperty('tvid', 0);
+        /** @var modTemplateVar $tv */
+        $tv = $this->modx->getObject('modTemplateVar', $tvid);
+        if ($tv) {
+            $tvProperties = $tv->get('input_properties');
+        } else {
+            $tvProperties = [];
+            $c->where(['id' => 0]);
+            $this->modx->log(xPDO::LOG_LEVEL_ERROR, 'Invalid template variable ID!', '', 'SuperBoxSelect');
+        }
+        $allowedUsergroups = $this->modx->getOption('allowedUsergroups', $tvProperties, '', true);
+        $deniedUsergroups = $this->modx->getOption('deniedUsergroups', $tvProperties, '', true);
 
         // Get query
         $query = $this->getProperty('query');
         if (!empty($query)) {
             $valuesqry = $this->getProperty('valuesqry');
             if (!empty($valuesqry)) {
-                $c->where(array(
+                $c->where([
                     'id:IN' => explode('||', $query)
-                ));
+                ]);
             } else {
-                $c->where(array(
+                $c->where([
                     'username:LIKE' => '%' . $query . '%'
-                ));
+                ]);
             }
         }
 
-        $c->select($this->modx->getSelectColumns($this->classKey, $this->classKey, '', array('id', 'username')));
+        $c->select($this->modx->getSelectColumns($this->classKey, $this->classKey, '', ['id', 'username']));
 
         if ($allowedUsergroups || $deniedUsergroups) {
-            $c->leftJoin('modUserGroupMember', 'modUserGroupMember', array('modUserGroupMember.member = modUser.id'));
-            $c->leftJoin('modUserGroup', 'modUserGroup', array('modUserGroup.id = modUserGroupMember.user_group'));
+            $c->leftJoin('modUserGroupMember', 'modUserGroupMember', ['modUserGroupMember.member = modUser.id']);
+            $c->leftJoin('modUserGroup', 'modUserGroup', ['modUserGroup.id = modUserGroupMember.user_group']);
             $c->groupby('modUser.id');
             if ($allowedUsergroups) {
                 $allowedUsergroups = explode(',', $allowedUsergroups);
-                $c->where(array(
+                $c->where([
                     'modUserGroup.name:IN' => $allowedUsergroups
-                ));
+                ]);
             }
             if ($deniedUsergroups) {
                 $deniedUsergroups = explode(',', $deniedUsergroups);
-                $c->where(array(
-                    array(
+                $c->where([
+                    [
                         'modUserGroup.name:NOT IN' => $deniedUsergroups,
                         'OR:modUserGroup.name:IS' => null
-                    )
-                ));
+                    ]
+                ]);
             }
         }
 
@@ -93,12 +88,12 @@ class SuperboxselectUsersGetListProcessor extends modObjectGetListProcessor
         $originalValue = $this->getProperty('originalValue');
         if ($originalValue) {
             $originalValue = array_map('trim', explode('||', $originalValue));
-            $c->where(array(
+            $c->where([
                 'id:NOT IN' => $originalValue
-            ));
+            ]);
         }
 
-        if ($this->modx->getOption('superboxselect.debug', null, false)) {
+        if ($this->superboxselect->getOption('debug')) {
             $c->prepare();
             $this->modx->log(xPDO::LOG_LEVEL_ERROR, $c->toSQL());
         }
@@ -113,9 +108,9 @@ class SuperboxselectUsersGetListProcessor extends modObjectGetListProcessor
     {
         $id = $this->getProperty('id');
         if (!empty($id)) {
-            $c->where(array(
+            $c->where([
                 'id:IN' => array_map('intval', explode('||', $id))
-            ));
+            ]);
         }
         $c->sortby($this->getProperty('defaultSortField'), $this->getProperty('defaultSortDirection'));
         return $c;
@@ -127,10 +122,10 @@ class SuperboxselectUsersGetListProcessor extends modObjectGetListProcessor
      */
     public function prepareRow(xPDOObject $object)
     {
-        return array(
+        return [
             'id' => $object->get('id'),
             'title' => $object->get('username')
-        );
+        ];
     }
 }
 

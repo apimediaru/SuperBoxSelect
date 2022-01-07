@@ -1,21 +1,26 @@
 <?php
-
 /**
- * Options processor for SuperBoxSelect TV.
+ * Resources options processor
  *
  * @package superboxselect
  * @subpackage processors
  */
-if (!class_exists('SuperboxselectOptionsProcessor')) {
-    include(dirname(dirname(__FILE__)) . '/options.class.php');
-}
 
-class SuperboxselectResourcesOptionsProcessor extends SuperboxselectOptionsProcessor
+use TreehillStudio\SuperBoxSelect\Processors\OptionsProcessor;
+
+class SuperboxselectResourcesOptionsProcessor extends OptionsProcessor
 {
-    /**
-     * @var string
-     */
     public $inputOptionType = 'resources';
+
+    /**
+     * {@inheritDoc}
+     * @return bool
+     */
+    public function initialize()
+    {
+        $this->modx->lexicon('superboxselect.resources');
+        return parent::initialize();
+    }
 }
 
 return 'SuperboxselectResourcesOptionsProcessor';

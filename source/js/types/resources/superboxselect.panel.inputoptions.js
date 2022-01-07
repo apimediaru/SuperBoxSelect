@@ -126,7 +126,12 @@ SuperBoxSelect.panel.InputOptionsResources = function (config) {
             }, {
                 xtype: 'textarea',
                 fieldLabel: _('resourcelist_where'),
-                description: MODx.expandHelp ? '' : _('resourcelist_where_desc'),
+                description: MODx.expandHelp ? '' : _('resourcelist_where_desc', {
+                    'example_1': '[{"template:=":"4"}]',
+                    'example_2': '[{"pagetitle:!=":"Home"}]',
+                    'example_3': '[{"class_key:IN":["MODX\\\Revolution\\\modWebLink","MODX\\\Revolution\\\modSymLink"]}]',
+                    'example_4': '[{"published":1},{"isfolder":0}]'
+                }),
                 name: 'inopt_where',
                 id: 'inopt_where',
                 value: this.params.where || '',
@@ -140,7 +145,12 @@ SuperBoxSelect.panel.InputOptionsResources = function (config) {
             }, {
                 xtype: MODx.expandHelp ? 'label' : 'hidden',
                 forId: 'inopt_where',
-                html: _('resourcelist_where_desc'),
+                html: _('resourcelist_where_desc', {
+                    'example_1': '[{"template:=":"4"}]',
+                    'example_2': '[{"pagetitle:!=":"Home"}]',
+                    'example_3': '[{"class_key:IN":["MODX\\\Revolution\\\modWebLink","MODX\\\Revolution\\\modSymLink"]}]',
+                    'example_4': '[{"published":1},{"isfolder":0}]'
+                }),
                 cls: 'desc-under'
             }]
         }]

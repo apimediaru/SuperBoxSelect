@@ -18,65 +18,30 @@ SuperBoxSelect.panel.InputOptions = function (config) {
         labelAlign: 'top',
         border: false,
         items: [{
-            layout: 'column',
-            items: [{
-                columnWidth: (SuperBoxSelect.config.advanced) ? .5 : 1,
-                layout: 'form',
-                labelAlign: 'top',
-                items: [{
-                    xtype: 'modx-combo',
-                    fieldLabel: _('superboxselect.selectType'),
-                    description: MODx.expandHelp ? '' : _('superboxselect.selectType_desc'),
-                    name: 'inopt_selectType',
-                    hiddenName: 'inopt_selectType',
-                    id: 'inopt_selectType',
-                    value: this.params.selectType || 'resources',
-                    anchor: '100%',
-                    url: SuperBoxSelect.config.connectorUrl,
-                    baseParams: {
-                        action: 'mgr/selecttypes/getlist',
-                        tvId: MODx.request.id,
-                        package: this.params.selectPackage || ''
-                    },
-                    listeners: {
-                        select: {
-                            fn: this.selectType,
-                            scope: this
-                        }
-                    }
-                }, {
-                    xtype: MODx.expandHelp ? 'label' : 'hidden',
-                    forId: 'inopt_selectType',
-                    html: _('superboxselect.selectType_desc'),
-                    cls: 'desc-under'
-                }]
-            }, {
-                columnWidth: .5,
-                layout: 'form',
-                labelAlign: 'top',
-                items: [{
-                    xtype: 'textfield',
-                    fieldLabel: _('superboxselect.selectPackage'),
-                    description: MODx.expandHelp ? '' : _('superboxselect.selectPackage_desc'),
-                    name: 'inopt_selectPackage',
-                    id: 'inopt_selectPackage',
-                    value: this.params.selectPackage || '',
-                    anchor: '100%',
-                    hidden: !SuperBoxSelect.config.advanced,
-                    listeners: {
-                        change: {
-                            fn: this.markDirty,
-                            scope: this
-                        }
-                    }
-                }, {
-                    xtype: MODx.expandHelp ? 'label' : 'hidden',
-                    forId: 'inopt_selectPackage',
-                    html: _('superboxselect.selectPackage_desc'),
-                    cls: 'desc-under',
-                    hidden: !SuperBoxSelect.config.advanced
-                }]
-            }]
+            xtype: 'modx-combo',
+            fieldLabel: _('superboxselect.selectType'),
+            description: MODx.expandHelp ? '' : _('superboxselect.selectType_desc'),
+            name: 'inopt_selectType',
+            hiddenName: 'inopt_selectType',
+            id: 'inopt_selectType',
+            value: this.params.selectType || 'resources',
+            anchor: '100%',
+            url: SuperBoxSelect.config.connectorUrl,
+            baseParams: {
+                action: 'mgr/selecttypes/getlist',
+                tvId: MODx.request.id
+            },
+            listeners: {
+                select: {
+                    fn: this.selectType,
+                    scope: this
+                }
+            }
+        }, {
+            xtype: MODx.expandHelp ? 'label' : 'hidden',
+            forId: 'inopt_selectType',
+            html: _('superboxselect.selectType_desc'),
+            cls: 'desc-under'
         }, {
             layout: 'column',
             items: [{
@@ -216,11 +181,11 @@ SuperBoxSelect.panel.InputOptions = function (config) {
             cls: "treehillstudio_about",
             html: '<img width="146" height="40" src="' + SuperBoxSelect.config.assetsUrl + 'img/treehill-studio-small.png"' + ' srcset="' + SuperBoxSelect.config.assetsUrl + 'img/treehill-studio-small@2x.png 2x" alt="Treehill Studio">',
             listeners: {
-                afterrender: function (component) {
-                    component.getEl().select('img').on('click', function () {
-                        var msg = '<span style="display: inline-block; text-align: center;">© 2011-2016 by Benjamin Vauchel <a href="https://github.com/benjamin-vauchel" target="_blank">github.com/benjamin-vauchel</a><br>' +
+                afterrender: function () {
+                    this.getEl().select('img').on('click', function () {
+                        var msg = '<span style="display: inline-block; text-align: center;">&copy; 2011-2016 by Benjamin Vauchel <a href="https://github.com/benjamin-vauchel" target="_blank">github.com/benjamin-vauchel</a><br>' +
                             '<img src="' + SuperBoxSelect.config.assetsUrl + 'img/treehill-studio.png" srcset="' + SuperBoxSelect.config.assetsUrl + 'img/treehill-studio@2x.png 2x" alt="Treehill Studio" style="margin-top: 10px"><br>' +
-                            '© 2016-2021 by <a href="https://treehillstudio.com" target="_blank">treehillstudio.com</a></span>';
+                            '&copy; 2016-2022 by <a href="https://treehillstudio.com" target="_blank">treehillstudio.com</a></span>';
                         Ext.Msg.show({
                             title: _('superboxselect') + ' ' + SuperBoxSelect.config.version,
                             msg: msg,
@@ -249,13 +214,14 @@ Ext.extend(SuperBoxSelect.panel.InputOptions, MODx.Panel, {
                 el.setStyle('height', '0');
             });
         }
-        var section = Ext.getCmp('type_' + v.id);
+        var id = v.id.split(/_/).pop();
+        var section = Ext.getCmp('type_' + id);
         if (section) {
             section.getEl().setStyle('height', null);
         }
     },
     inputOptionsAfterRender: function () {
-        var selecttype = Ext.getCmp('inopt_selectType').getValue();
+        var selecttype = Ext.getCmp('inopt_selectType').getValue().split(/_/).pop();
         if (selecttype) {
             var section = Ext.getCmp('type_' + selecttype);
             if (section) {
@@ -269,6 +235,13 @@ Ext.extend(SuperBoxSelect.panel.InputOptions, MODx.Panel, {
                 overflow: 'hidden'
             })
         }
+        var cmp = this;
+        Ext.getCmp('modx-panel-tv-input-properties').addListener('resize', function () {
+            cmp.setWidth(Ext.getCmp('modx-input-props').getWidth()).doLayout();
+        });
+        Ext.getCmp('modx-tv-tabs').addListener('tabchange', function () {
+            cmp.setWidth(Ext.getCmp('modx-input-props').getWidth()).doLayout();
+        });
     },
     markDirty: function () {
         Ext.getCmp('modx-panel-tv').markDirty();

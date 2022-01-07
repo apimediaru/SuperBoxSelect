@@ -9,7 +9,6 @@ Depth | **(Type = Resource)** The levels deep that the query to grab the list of
 Field Template | **(System setting superboxselect.advanced = active)** Field template for the SuperBoxSelect (could contain html tags). Default: {title} ({id}) | -
 Limit to Related Context | **(Type = Resource)** If Yes, will only include the Resources related to the context of the current Resource. | No
 Max. Elements | Maximum number of elements in the list. 0 means no limit | -
-Package | **(System setting superboxselect.advanced = active)** Folder name of a package, where the 'types' getlists processor are retrieved from (if the system setting superboxselect.advanced is active). | -
 Page Size | **(Type = Resource)** If the page size is greater than 0 and max. elements is 1, a pagination is displayed in the footer of the dropdown list. | -
 Parents | **(Type = Resource)** A list of IDs to grab children for the list. | -
 Stack Items | If enabled, the SuperBoxSelect items will be stacked one per line. Per default the items are displayed inline. | No

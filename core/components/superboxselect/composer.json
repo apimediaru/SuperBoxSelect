@@ -1,0 +1,30 @@
+{
+  "name": "treehillstudio/superboxselect",
+  "description": "Advanced Listbox/Resource List Template Variable",
+  "authors": [
+    {
+      "name": "Benjamin Vauchel",
+      "email": "benjamin.vauchel@gmail.com",
+      "homepage": "https://github.com/benjamin-vauchel"
+    },
+    {
+      "name": "Thomas Jakobi",
+      "email": "office@treehillstudio.com",
+      "homepage": "https://treehillstudio.com"
+    }
+  ],
+  "license": "GPL-2.0-or-later",
+  "config": {
+    "platform": {
+      "php": "7.2.5"
+    }
+  },
+  "require": {
+    "php": ">=7.2"
+  },
+  "autoload": {
+    "psr-4": {
+      "TreehillStudio\\SuperBoxSelect\\": "src/"
+    }
+  }
+}

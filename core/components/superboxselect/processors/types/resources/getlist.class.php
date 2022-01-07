@@ -1,33 +1,18 @@
 <?php
 /**
- * Get list processor for SuperBoxSelect TV.
+ * Get list resources processor
  *
  * @package superboxselect
  * @subpackage processors
  */
 
-class SuperboxselectResourcesGetListProcessor extends modObjectGetListProcessor
+use TreehillStudio\SuperBoxSelect\Processors\ObjectGetListProcessor;
+
+class SuperboxselectResourcesGetListProcessor extends ObjectGetListProcessor
 {
-    /**
-     * @var string $classKey
-     */
     public $classKey = 'modResource';
-    /**
-     * @var array $languageTopics
-     */
-    public $languageTopics = array('superboxselect:default');
-    /**
-     * @var string $defaultSortField
-     */
     public $defaultSortField = 'pagetitle';
-    /**
-     * @var string $defaultSortDirection
-     */
     public $defaultSortDirection = 'ASC';
-    /**
-     * @var string $objectType
-     */
-    public $objectType = 'superboxselect.resources';
 
     /**
      * @return bool
@@ -48,14 +33,24 @@ class SuperboxselectResourcesGetListProcessor extends modObjectGetListProcessor
     public function prepareQueryBeforeCount(xPDOQuery $c)
     {
         // Get Properties
-        $where = $this->getProperty('where', array());
-        $limitRelatedContext = $this->getProperty('limitRelatedContext', false);
+        $tvid = $this->getProperty('tvid', 0);
+        /** @var modTemplateVar $tv */
+        $tv = $this->modx->getObject('modTemplateVar', $tvid);
+        if ($tv) {
+            $tvProperties = $tv->get('input_properties');
+        } else {
+            $tvProperties = [];
+            $c->where(['id' => 0]);
+            $this->modx->log(xPDO::LOG_LEVEL_ERROR, 'Invalid template variable ID!', '', 'SuperBoxSelect');
+        }
+        $where = $this->modx->getOption('where', $tvProperties, '', true);
+        $limitRelatedContext = $this->modx->getOption('limitRelatedContext', $tvProperties, '0', true) == '1';
         $contextKey = ($limitRelatedContext) ? $this->getProperty('contextKey', false) : false;
-        $resourceId = intval($this->getProperty('resourceId'));
-        $parents = $this->getProperty('parents', '0');
-        $parents = ($parents) ? explode(',', $parents) : array();
-        $depth = $this->getProperty('depth', 10);
-        $valueField = $this->getProperty('valueField', 'id');
+        $resourceId = (int)$this->getProperty('resourceId');
+        $parents = $this->modx->getOption('parents', $tvProperties, '', true);
+        $parents = ($parents) ? explode(',', $parents) : [];
+        $depth = (int)$this->modx->getOption('depth', $tvProperties, 10, true);
+        $valueField = $this->modx->getOption('valueField', $tvProperties, 'id', true);
 
         if ($where) {
             $where = json_decode($where, true);
@@ -65,25 +60,25 @@ class SuperboxselectResourcesGetListProcessor extends modObjectGetListProcessor
         // Get the context of the current edited resource
         if (!$contextKey) {
             $resource = $this->modx->getObject('modResource', $resourceId);
-            $contextKey = $resource->get('context_key');
+            $contextKey = ($resource) ? $resource->get('context_key') : '';
         }
 
         // Restrict to related context
         if (!empty($limitRelatedContext) && ($limitRelatedContext == 1 || $limitRelatedContext == 'true')) {
-            $c->where(array('context_key' => $contextKey));
+            $c->where(['context_key' => $contextKey]);
         }
 
         // Get parents
         if (!empty($parents)) {
-            $children = array();
+            $children = [];
             foreach ($parents as &$parent) {
                 // if $parent is not numeric, assume it is set by a context/system setting
                 if (!is_numeric($parent)) {
                     // get the key of this context that is referenced by
-                    $object = $this->modx->getObject('modContextSetting', array(
+                    $object = $this->modx->getObject('modContextSetting', [
                         'context_key' => $contextKey,
                         'key' => $parent
-                    ));
+                    ]);
                     if ($object) {
                         // if the context and the context key are valid get the context setting
                         $parent = $object->get('value');
@@ -94,13 +89,13 @@ class SuperboxselectResourcesGetListProcessor extends modObjectGetListProcessor
                     }
                 }
                 if (!empty($limitRelatedContext) && ($limitRelatedContext == 1 || $limitRelatedContext == 'true')) {
-                    $pchildren = $this->modx->getChildIds($parent, $depth, array('context' => $contextKey));
+                    $pchildren = $this->modx->getChildIds($parent, $depth, ['context' => $contextKey]);
                 } else {
                     $parentObject = $this->modx->getObject('modResource', $parent);
                     if ($parentObject) {
-                        $pchildren = $this->modx->getChildIds($parent, $depth, array('context' => $parentObject->get('context_key')));
+                        $pchildren = $this->modx->getChildIds($parent, $depth, ['context' => $parentObject->get('context_key')]);
                     } else {
-                        $pchildren = array();
+                        $pchildren = [];
                     }
                 }
                 if (!empty($pchildren)) {
@@ -111,9 +106,9 @@ class SuperboxselectResourcesGetListProcessor extends modObjectGetListProcessor
                 $parents = array_merge($parents, $children);
             }
 
-            $c->where(array(
+            $c->where([
                 'parent:IN' => $parents,
-            ));
+            ]);
         }
 
         // Get query
@@ -121,9 +116,9 @@ class SuperboxselectResourcesGetListProcessor extends modObjectGetListProcessor
         if (!empty($query)) {
             $valuesqry = $this->getProperty('valuesqry');
             if (empty($valuesqry)) {
-                $c->where(array(
+                $c->where([
                     'pagetitle:LIKE' => '%' . $query . '%'
-                ));
+                ]);
             }
         }
 
@@ -131,20 +126,20 @@ class SuperboxselectResourcesGetListProcessor extends modObjectGetListProcessor
         $originalValue = $this->getProperty('originalValue');
         if ($originalValue) {
             $originalValue = array_map('trim', explode('||', $originalValue));
-            $c->where(array(
+            $c->where([
                 $valueField . ':NOT IN' => $originalValue
-            ));
+            ]);
         }
 
-        $columns = (in_array($valueField, $this->modx->getFields($this->classKey))) ? array('id', $valueField, 'pagetitle') : array('id', 'pagetitle');
+        $columns = (in_array($valueField, $this->modx->getFields($this->classKey))) ? ['id', $valueField, 'pagetitle'] : ['id', 'pagetitle'];
         $c->select($this->modx->getSelectColumns($this->classKey, $this->classKey, '', $columns));
 
-        $c->where(array(
+        $c->where([
             'deleted' => false,
             'published' => true
-        ));
+        ]);
 
-        if ($this->modx->getOption('superboxselect.debug', null, false)) {
+        if ($this->superboxselect->getOption('debug')) {
             $c->prepare();
             $this->modx->log(xPDO::LOG_LEVEL_ERROR, $c->toSQL());
         }
@@ -166,18 +161,18 @@ class SuperboxselectResourcesGetListProcessor extends modObjectGetListProcessor
         $valuesqry = $this->getProperty('valuesqry');
         if (!empty($valuesqry)) {
             $query = $this->getProperty('query');
-            $c->where(array(
+            $c->where([
                 $valueField . ':IN' => explode('||', $query)
-            ));
+            ]);
         } else {
             $id = $this->getProperty('id');
             if (!empty($id)) {
-                $c->where(array(
+                $c->where([
                     $valueField . ':IN' => array_map('trim', explode('||', $id))
-                ));
+                ]);
             }
         }
-        $c->sortby('pagetitle', 'ASC');
+        $c->sortby('pagetitle');
 
         return $c;
     }
@@ -190,10 +185,10 @@ class SuperboxselectResourcesGetListProcessor extends modObjectGetListProcessor
     {
         $valueField = $this->getProperty('valueField', 'id');
         $valueField = (in_array($valueField, $this->modx->getFields($this->classKey))) ? $valueField : 'id';
-        return array(
+        return [
             'id' => $object->get($valueField),
             'title' => $object->get('pagetitle')
-        );
+        ];
     }
 }
 

@@ -5,7 +5,22 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [2.4.2] - TBA
+## [3.0.0] - 2022-01-07
+
+### Added
+
+- Extend external select types with plugins 
+
+### Changed
+
+- Code refactoring
+- Full MODX 3 compatibility
+
+### Removed
+
+- selectPackage option to add external select types
+
+## [2.4.2] - 2021-02-08
 
 ### Changed
 
@@ -15,7 +30,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [2.4.1] - 2020-08-26
 
-### Changed
+### Fixed
 
 - Fix not working boolean template variable options [#23].
 
@@ -25,32 +40,32 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Allow other values to be saved in the SuperBoxSelect than the resource id
 
-### Changed
+### Fixed
 
 - Restore pageSize for multi selects disabled in SuperBoxSelect 2.3.8
 - Fix showing 'The changes you made may not be saved' alert, even when the SuperBoxSelect value was not changed.
 
 ## [2.3.8] - 2020-01-28
 
-### Changed
+### Fixed
 
 - Fix a limit/pageSize issue
 
 ## [2.3.7] - 2020-01-14
 
-### Changed
+### Fixed
 
 - Fix autocomplete is not working on user list
 
 ## [2.3.6] - 2020-01-04
 
-### Changed
+### Fixed
 
 - Fix sorting of user selector [#15]. Thanks to @hugopeek
 
 ## [2.3.5] - 2019-10-19
 
-### Changed
+### Fixed
 
 - Fix an issue that stack items option can't be disabled
 
@@ -62,13 +77,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [2.3.3] - 2019-05-06
 
-### Changed
+### Fixed
 
 - Fix drag & drop ordering after deleting a list element
 
 ## [2.3.2] - 2019-04-27
 
-### Changed
+### Fixed
 
 - Fix an issue, when an external package does not exist
 - Fix drag & drop ordering
@@ -77,8 +92,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-- Fix input options for MODX Revolution 2.7+
 - Use less space in input options
+- 
+### Fixed
+
+- Fix input options for MODX Revolution 2.7+
 
 ## [2.3.0] - 2019-02-17
 
@@ -88,13 +106,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [2.2.2] - 2017-02-03
 
-### Changed
+### Fixed
 
 - Fixing limit to related context option
 
 ## [2.2.1] - 2017-01-29
 
-### Changed
+### Fixed
 
 - Fixing disabling the pagination
 
@@ -106,13 +124,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [2.1.2] - 2016-10-13
 
-### Changed
+### Fixed
 
 - Fix backwards compatibility issue
 
 ## [2.1.1] - 2016-10-11
 
-### Changed
+### Fixed
 
 - Fix single value combo not saving the value
 
@@ -122,8 +140,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - The superboxselect is not restricted anymore to list only resources
 - Single value
-- Two default types (resources, users)
-- Add own package based types
+- Two default select types (resources, users)
+- Add own package based select types
 
 ## [2.0.0] - 2016-06-27
 
@@ -138,19 +156,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [1.0.1-pl2] - 2012-06-16
 
-### Changed
+### Fixed
 
 - Fix fetch resource bug
 
 ## [1.0.1-pl1] - 2012-06-16
 
-### Changed
+### Fixed
 
 - Fix height component to display properly multiple rows
 
 ## [1.0.1-rc2] - 2012-02-01
 
-### Changed
+### Fixed
 
 - Fix installation when manager directory name was changed
 

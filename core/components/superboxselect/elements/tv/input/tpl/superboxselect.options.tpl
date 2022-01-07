@@ -1,8 +1,6 @@
-<div id="tv-input-properties-form"></div>
 {$inputOptionTypes}
 <script type="text/javascript">
-    // <![CDATA[
-    {literal}
+    // <![CDATA[{literal}
     var params = {
         {/literal}{foreach from=$params key=k item=v name='p'}
         '{$k}': '{$v|escape:"javascript"}'{if NOT $smarty.foreach.p.last}, {/if}
@@ -11,7 +9,7 @@
     MODx.load({
         xtype: 'superboxselect-panel-inputoptions',
         params: params,
-        renderTo: 'tv-input-properties-form'
+        applyTo: 'modx-input-props'
     });
     // ]]>
 </script>

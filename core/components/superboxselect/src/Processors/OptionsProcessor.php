@@ -1,31 +1,16 @@
 <?php
-
 /**
- * Options processor for SuperBoxSelect TV.
+ * Options processor
  *
  * @package superboxselect
  * @subpackage processors
  */
-class SuperboxselectOptionsProcessor extends modProcessor
+
+namespace TreehillStudio\SuperBoxSelect\Processors;
+
+class OptionsProcessor extends Processor
 {
-    /**
-     * @var array $languageTopics
-     */
-    public $languageTopics = array('superboxselect:default');
-
-    /**
-     * @var SuperBoxSelect $superboxselect
-     */
-    public $superboxselect;
-
-    /**
-     * @var string
-     */
     public $fieldTpl = '{title} ({id})';
-
-    /**
-     * @var string
-     */
     public $inputOptionType = '';
 
     /**
@@ -35,12 +20,6 @@ class SuperboxselectOptionsProcessor extends modProcessor
      */
     public function process()
     {
-        $corePath = $this->modx->getOption('superboxselect.core_path', null, $this->modx->getOption('core_path') . 'components/superboxselect/');
-        /** @var SuperBoxSelect $superboxselect */
-        $this->superboxselect = $this->modx->getService('superboxselect', 'SuperBoxSelect', $corePath . 'model/superboxselect/', array(
-            'core_path' => $corePath
-        ));
-
         $option = $this->getProperty('option');
 
         $result = '';
@@ -69,15 +48,13 @@ class SuperboxselectOptionsProcessor extends modProcessor
     public function getInputOptionType()
     {
         if ($this->inputOptionType) {
-            $inputOptionType = array(
-                'type' => "{xtype: 'superboxselect-panel-inputoptions-{$this->inputOptionType}', params: config.params}",
+            $inputOptionType = [
+                'type' => "{xtype: 'superboxselect-panel-inputoptions-$this->inputOptionType', params: config.params}",
                 'success' => true
-            );
+            ];
             return $inputOptionType;
         } else {
             return null;
         }
     }
 }
-
-return 'SuperboxselectUsersOptionsProcessor';

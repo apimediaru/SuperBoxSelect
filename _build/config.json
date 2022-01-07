@@ -1,9 +1,9 @@
 {
   "name": "SuperBoxSelect",
   "lowCaseName": "superboxselect",
-  "description": "Advanced Listbox/Resource List Template Variable Type",
+  "description": "Advanced Listbox/Resource List Template Variable",
   "author": "Benjamin Vauchel, Thomas Jakobi",
-  "version": "2.4.2",
+  "version": "3.0.0",
   "package": {
     "elements": {
       "plugins": [
@@ -14,8 +14,7 @@
           "events": [
             "OnManagerPageBeforeRender",
             "OnTVInputPropertiesList",
-            "OnTVInputRenderList",
-            "OnDocFormRender"
+            "OnTVInputRenderList"
           ]
         }
       ]
@@ -38,7 +37,7 @@
   "dependencies": [
     {
       "name": "php",
-      "version": ">=5.6"
+      "version": ">=7.2"
     },
     {
       "name": "modx",
@@ -54,6 +53,8 @@
     },
     "resolver": {
       "after": [
+        "resolve.cleanup.php",
+        "resolve.events.php",
         "resolve.treehillstudio.php"
       ]
     }

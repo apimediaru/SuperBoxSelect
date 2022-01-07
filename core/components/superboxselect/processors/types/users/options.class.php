@@ -1,21 +1,26 @@
 <?php
-
 /**
- * Options processor for SuperBoxSelect TV.
+ * Users options processor
  *
  * @package superboxselect
  * @subpackage processors
  */
-if (!class_exists('SuperboxselectOptionsProcessor')) {
-    include(dirname(dirname(__FILE__)) . '/options.class.php');
-}
 
-class SuperboxselectUsersOptionsProcessor extends SuperboxselectOptionsProcessor
+use TreehillStudio\SuperBoxSelect\Processors\OptionsProcessor;
+
+class SuperboxselectUsersOptionsProcessor extends OptionsProcessor
 {
-    /**
-     * @var string
-     */
     public $inputOptionType = 'users';
+
+    /**
+     * {@inheritDoc}
+     * @return bool
+     */
+    public function initialize()
+    {
+        $this->modx->lexicon('superboxselect.users');
+        return parent::initialize();
+    }
 }
 
 return 'SuperboxselectUsersOptionsProcessor';
