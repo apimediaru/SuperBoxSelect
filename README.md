@@ -1,4 +1,4 @@
-[![Weblate](https://hosted.weblate.org/widgets/modx-superboxselect/-/svg-badge.svg)](https://hosted.weblate.org/engage/modx-superboxselect/)
+[![Weblate](https://hosted.weblate.org/widgets/modx-extras/-/modx-superboxselect-standard/svg-badge.svg)](https://hosted.weblate.org/engage/modx-extras/)
 
 # SuperBoxSelect
 
@@ -30,4 +30,4 @@ The project is licensed under the [GPLv2 license](https://github.com/Jako/SuperB
 
 ## Translations
 
-The project could be translated on [Weblate](https://hosted.weblate.org/engage/modx-superboxselect/)
+Translations of the package can be made for the [Default Lexicon](https://hosted.weblate.org/projects/modx-extras/modx-superboxselect-standard/) and the [System Setting Lexicon](https://hosted.weblate.org/projects/modx-extras/modx-superboxselect-system-settings/)
