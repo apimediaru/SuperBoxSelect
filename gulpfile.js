@@ -19,35 +19,50 @@ const banner = '/*!\n' +
     ' * Version: <%= pkg.version %>\n' +
     ' * Build date: ' + format("yyyy-MM-dd", new Date()) + '\n' +
     ' */';
+const year = new Date().getFullYear();
 
 gulp.task('scripts-mgr', function () {
     return gulp.src([
-        'source/js/mgr/imageplus.js',
-        'source/js/mgr/imageplus.panel.input.js',
-        'source/js/mgr/imageplus.window.editor.js',
-        'source/js/mgr/imageplus.migx_renderer.js',
-        'source/js/mgr/tools/JSON2.js',
-        'node_modules/jquery/dist/jquery.slim.min.js',
-        'source/js/mgr/jcrop/jquery.jcrop.min.js',
-        'source/js/mgr/imageplus.jquery.imagecrop.js',
-        'source/js/mgr/imageplus.grid.js'
+        'node_modules/sortablejs/Sortable.js',
+        'source/js/mgr/superboxselect.js',
+        'source/js/mgr/superboxselect.panel.inputoptions.js',
+        'source/js/mgr/superboxselect.combo.templatevar.js'
     ])
-        .pipe(concat('imageplus.min.js'))
+        .pipe(concat('superboxselect.min.js'))
         .pipe(uglify())
         .pipe(header(banner + '\n', {pkg: pkg}))
-        .pipe(gulp.dest('assets/components/imageplus/js/mgr/'))
+        .pipe(gulp.dest('assets/components/superboxselect/js/mgr/'))
 });
+gulp.task('scripts-resources', function () {
+    return gulp.src([
+        'source/js/types/resources/superboxselect.panel.inputoptions.js'
+    ])
+        .pipe(concat('superboxselect.panel.inputoptions.min.js'))
+        .pipe(uglify())
+        .pipe(header(banner + '\n', {pkg: pkg}))
+        .pipe(gulp.dest('assets/components/superboxselect/js/types/resources/'))
+});
+gulp.task('scripts-users', function () {
+    return gulp.src([
+        'source/js/types/users/superboxselect.panel.inputoptions.js'
+    ])
+        .pipe(concat('superboxselect.panel.inputoptions.min.js'))
+        .pipe(uglify())
+        .pipe(header(banner + '\n', {pkg: pkg}))
+        .pipe(gulp.dest('assets/components/superboxselect/js/types/users/'))
+});
+gulp.task('scripts', gulp.series('scripts-mgr', 'scripts-resources', 'scripts-users'));
 
 gulp.task('sass-mgr', function () {
     return gulp.src([
-        'source/sass/mgr/imageplus.scss'
+        'source/sass/mgr/superboxselect.scss'
     ])
         .pipe(sass().on('error', sass.logError))
         .pipe(postcss([
             autoprefixer()
         ]))
         .pipe(gulp.dest('source/css/mgr/'))
-        .pipe(concat('imageplus.css'))
+        .pipe(concat('superboxselect.css'))
         .pipe(postcss([
             cssnano({
                 preset: ['default', {
@@ -61,43 +76,41 @@ gulp.task('sass-mgr', function () {
             suffix: '.min'
         }))
         .pipe(footer('\n' + banner, {pkg: pkg}))
-        .pipe(gulp.dest('assets/components/imageplus/css/mgr/'))
+        .pipe(gulp.dest('assets/components/superboxselect/css/mgr/'))
 });
 
 gulp.task('images-mgr', function () {
     return gulp.src('./source/img/**/*.(png|jpg|gif|svg)')
-        .pipe(gulp.dest('assets/components/imageplus/img/'));
+        .pipe(gulp.dest('assets/components/superboxselect/img/'));
 });
 
 gulp.task('bump-copyright', function () {
     return gulp.src([
-        'core/components/imageplus/**/*.php',
-        'source/js/mgr/**/*.js',
+        'core/components/superboxselect/model/superboxselect/superboxselect.class.php',
+        'core/components/superboxselect/src/SuperBoxSelect.php'
     ], {base: './'})
-        .pipe(replace(/Copyright 2015(-\d{4})? by/g, 'Copyright ' + (new Date().getFullYear() > 2015 ? '2015-' : '') + new Date().getFullYear() + ' by'))
-        .pipe(replace(/(@copyright .*?) 2015(-\d{4})?/g, '$1 ' + (new Date().getFullYear() > 2015 ? '2015-' : '') + new Date().getFullYear()))
+        .pipe(replace(/Copyright 2016(-\d{4})? by/g, 'Copyright ' + (year > 2016 ? '2016-' : '') + year + ' by'))
         .pipe(gulp.dest('.'));
 });
 gulp.task('bump-version', function () {
     return gulp.src([
-        'core/components/imageplus/model/imageplus/imageplus.class.php',
+        'core/components/superboxselect/src/SuperBoxSelect.php'
     ], {base: './'})
-        .pipe(replace(/version = '\d+.\d+.\d+[-a-z0-9]*'/ig, 'version = \'' +  pkg.version + '\''))
+        .pipe(replace(/version = '\d+\.\d+\.\d+[-a-z0-9]*'/ig, 'version = \'' + pkg.version + '\''))
         .pipe(gulp.dest('.'));
 });
 gulp.task('bump-options', function () {
     return gulp.src([
-        'core/components/imageplus/elements/tv/input/tpl/imageplus.options.tpl',
-        'core/components/imageplus/elements/tv/output/tpl/imageplus.options.tpl',
+        'source/js/mgr/superboxselect.panel.inputoptions.js'
     ], {base: './'})
-        .pipe(replace(/&copy; 2015(-\d{4})?/g, '&copy; ' + (new Date().getFullYear() > 2015 ? '2015-' : '') + new Date().getFullYear()))
+        .pipe(replace(/&copy; 2016(-\d{4})?/g, '&copy; ' + (year > 2016 ? '2016-' : '') + year))
         .pipe(gulp.dest('.'));
 });
 gulp.task('bump-docs', function () {
     return gulp.src([
         'mkdocs.yml',
     ], {base: './'})
-        .pipe(replace(/&copy; 2015(-\d{4})?/g, '&copy; ' + (new Date().getFullYear() > 2015 ? '2015-' : '') + new Date().getFullYear()))
+        .pipe(replace(/&copy; 2016(-\d{4})?/g, '&copy; ' + (year > 2016 ? '2016-' : '') + year))
         .pipe(gulp.dest('.'));
 });
 gulp.task('bump', gulp.series('bump-copyright', 'bump-version', 'bump-options', 'bump-docs'));
@@ -108,9 +121,9 @@ gulp.task('watch', function () {
     gulp.watch(['source/js/**/*.js'], gulp.series('scripts-mgr'));
     // Watch .scss files
     gulp.watch(['source/sass/**/*.scss'], gulp.series('sass-mgr'));
-    // Watch .scss files
+    // Watch *.(png|jpg|gif|svg) files
     gulp.watch(['source/img/**/*.(png|jpg|gif|svg)'], gulp.series('images-mgr'));
 });
 
 // Default Task
-gulp.task('default', gulp.series('bump', 'scripts-mgr', 'sass-mgr', 'images-mgr'));
+gulp.task('default', gulp.series('bump', 'scripts', 'sass-mgr', 'images-mgr'));
