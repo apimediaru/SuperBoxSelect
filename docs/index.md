@@ -8,7 +8,7 @@ types) as labelled boxes within the form field.
 ### Requirements
 
 * MODX Revolution 2.6+
-* PHP v5.6+
+* PHP 7.2+
 
 ### Features
 

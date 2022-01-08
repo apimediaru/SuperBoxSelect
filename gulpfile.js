@@ -21,6 +21,19 @@ const banner = '/*!\n' +
     ' */';
 const year = new Date().getFullYear();
 
+let phpversion;
+let modxversion;
+pkg.dependencies.forEach(function (dependency, index) {
+    switch (pkg.dependencies[index].name) {
+        case 'php':
+            phpversion = pkg.dependencies[index].version.replace(/>=/, '');
+            break;
+        case 'modx':
+            modxversion = pkg.dependencies[index].version.replace(/>=/, '');
+            break;
+    }
+});
+
 gulp.task('scripts-mgr', function () {
     return gulp.src([
         'node_modules/sortablejs/Sortable.js',
@@ -113,8 +126,15 @@ gulp.task('bump-docs', function () {
         .pipe(replace(/&copy; 2016(-\d{4})?/g, '&copy; ' + (year > 2016 ? '2016-' : '') + year))
         .pipe(gulp.dest('.'));
 });
-gulp.task('bump', gulp.series('bump-copyright', 'bump-version', 'bump-options', 'bump-docs'));
-
+gulp.task('bump-requirements', function () {
+    return gulp.src([
+        'docs/index.md',
+    ], {base: './'})
+        .pipe(replace(/[*-] MODX Revolution \d.\d.*/g, '* MODX Revolution ' + modxversion + '+'))
+        .pipe(replace(/[*-] PHP (v)?\d.\d.*/g, '* PHP ' + phpversion + '+'))
+        .pipe(gulp.dest('.'));
+});
+gulp.task('bump', gulp.series('bump-copyright', 'bump-version', 'bump-options', 'bump-docs', 'bump-requirements'));
 
 gulp.task('watch', function () {
     // Watch .js files
