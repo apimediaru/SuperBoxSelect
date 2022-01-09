@@ -1,6 +1,6 @@
 {
   "name": "superboxselect",
-  "description": "Advanced listbox/resource list custom template variable type",
+  "description": "Advanced listbox/resource list custom template variable",
   "author": "Thomas Jakobi <office@treehillstudio.com>",
   "private": true,
   "devDependencies": {

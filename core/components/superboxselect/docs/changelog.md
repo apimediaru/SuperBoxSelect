@@ -183,7 +183,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - Packaged for Revo
-- Use ExtJS superboxselect type included in MODx Revolution
+- Use Ext JS SuperBoxSelect type included in MODx Revolution
 
 ## [1.0.0-b1] - 2011-11-01
 

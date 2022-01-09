@@ -3,7 +3,7 @@
 # SuperBoxSelect
 
 Advanced `Listbox` / `Resource List` template variable type for MODx Revolution
-based on the SuperBoxSelect ExtJS Plugin. The template variable displays
+based on the SuperBoxSelect Ext JS Plugin. The template variable displays
 selected items (i.e. resources or other supported types) as labelled boxes
 within the form field. The item(s) could be searched by autocomplete in the
 combo box. In the Input Options of the template variable are a lot of options
