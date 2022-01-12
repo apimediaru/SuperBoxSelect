@@ -32,7 +32,7 @@ abstract class Plugin
     public function __construct($modx, &$scriptProperties)
     {
         $this->scriptProperties = &$scriptProperties;
-        $this->modx = &$modx;
+        $this->modx =& $modx;
         $corePath = $this->modx->getOption('superboxselect.core_path', null, $this->modx->getOption('core_path') . 'components/superboxselect/');
         $this->superboxselect = $this->modx->getService('superboxselect', 'SuperBoxSelect', $corePath . 'model/superboxselect/', [
             'core_path' => $corePath
