@@ -11,6 +11,7 @@
         params: params,
         applyTo: 'modx-input-props'
     });
+    MODx.helpUrl = 'https://jako.github.io/SuperBoxSelect/usage/';
     // ]]>
 </script>
 {/literal}
