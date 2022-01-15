@@ -44,32 +44,34 @@ class SuperboxselectInputRender extends modTemplateVarInputRender
             'core_path' => $corePath
         ]);
 
+        $selectType = (isset($params['selectType']) && $params['selectType'] != '') ? $params['selectType'] : 'resources';
         $params = array_merge($params, [
             'resourceId' => ($this->modx->resource) ? $this->modx->resource->get('id') : 0,
             'contextKey' => ($this->modx->resource) ? $this->modx->resource->get('context_key') : 'web',
-            'selectType' => (isset($params['selectType']) && $params['selectType'] != '') ? $params['selectType'] : 'resources'
+            'selectType' => $selectType
         ]);
+        $params['useRequest'] = true;
 
-        // @todo Add custom package selectType
+        // Get internal select types
         $internalTypes = $superboxselect->getTypes();
         $renderOptions = [];
         foreach ($internalTypes as $internalType) {
             $response = $this->modx->runProcessor('types/' . $internalType . '/options', [
-                'option' => 'fieldTpl',
+                'option' => 'renderOptions',
+                'useRequest' => $params['useRequest'],
+                'params' => $params
             ], [
                 'processors_path' => $superboxselect->getOption('processorsPath')
             ]);
             if (empty($response->errors)) {
-                $renderOptions[$internalType] = [
-                    'fieldTpl' => (!empty($params['fieldTpl'])) ? $params['fieldTpl'] : $response->response,
-                    'connector' => $superboxselect->getOption('connectorUrl')
-                ];
+                $renderOptions[$internalType] = $response->response;
             }
         }
 
         // Add external types to the list
         $customTypes = $this->modx->invokeEvent('OnSuperboxselectTypeOptions', [
             'option' => 'renderOptions',
+            'useRequest' => $params['useRequest'],
             'params' => $params
         ]);
         foreach ($customTypes as $customType) {
@@ -80,20 +82,14 @@ class SuperboxselectInputRender extends modTemplateVarInputRender
         }
 
         $baseParams = [
-            'action' => 'types/' . $params['selectType'] . '/getlist',
+            'action' => 'types/' . $selectType . '/getlist',
             'tvid' => $this->tv->get('id'),
             'resourceId' => $params['resourceId'],
             'contextKey' => $params['contextKey'],
         ];
 
-        if (isset($renderOptions[$params['selectType']])) {
-            $params['fieldTpl'] = $renderOptions[$params['selectType']]['fieldTpl'];
-            $this->setPlaceholder('connector', $renderOptions[$params['selectType']]['connector']);
-        }
-
         $params = [
             'allowBlank' => ($params['allowBlank'] == 1 || $params['allowBlank'] == 'true'),
-            'fieldLabel' => $this->modx->lexicon('superboxselect.' . $params['selectType']),
             'fieldTpl' => $params['fieldTpl'],
             'maxElements' => ($params['maxElements']) ? $params['maxElements'] * 1 : 1,
             'pageSize' => ($params['pageSize']) ? $params['pageSize'] * 1 : 0,
@@ -104,6 +100,12 @@ class SuperboxselectInputRender extends modTemplateVarInputRender
         }
         if (!$params['pageSize']) {
             unset($params['pageSize']);
+        }
+
+        if (isset($renderOptions[$selectType])) {
+            $params = array_merge($params, $renderOptions[$selectType]['params']);
+            $baseParams = array_merge($baseParams, $renderOptions[$selectType]['baseParams']);
+            $this->setPlaceholder('connector', $renderOptions[$selectType]['connector']);
         }
 
         $this->setPlaceholder('baseParams', json_encode($baseParams, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES));

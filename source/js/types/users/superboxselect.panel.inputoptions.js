@@ -8,6 +8,7 @@
 SuperBoxSelect.panel.InputOptionsUsers = function (config) {
     config = config || {};
 
+    this.ident = 'input-options-users' + Ext.id();
     this.options = config.options;
     this.params = config.params;
 
@@ -34,7 +35,7 @@ SuperBoxSelect.panel.InputOptionsUsers = function (config) {
                         fieldLabel: _('superboxselect.allowedUsergroups'),
                         description: MODx.expandHelp ? '' : _('rsuperboxselect.allowedUsergroups_desc'),
                         name: 'inopt_allowedUsergroups',
-                        id: 'inopt_allowedUsergroups',
+                        id: this.ident + 'inopt_allowedUsergroups',
                         value: this.params.allowedUsergroups || '',
                         anchor: '100%',
                         listeners: {
@@ -58,7 +59,7 @@ SuperBoxSelect.panel.InputOptionsUsers = function (config) {
                         fieldLabel: _('superboxselect.deniedUsergroups'),
                         description: MODx.expandHelp ? '' : _('rsuperboxselect.deniedUsergroups_desc'),
                         name: 'inopt_deniedUsergroups',
-                        id: 'inopt_deniedUsergroups',
+                        id: this.ident + 'inopt_deniedUsergroups',
                         value: this.params.deniedUsergroups || '',
                         anchor: '100%',
                         listeners: {

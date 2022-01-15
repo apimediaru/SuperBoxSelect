@@ -8,6 +8,7 @@
 SuperBoxSelect.panel.InputOptionsResources = function (config) {
     config = config || {};
 
+    this.ident = 'input-options-resources' + Ext.id();
     this.options = config.options;
     this.params = config.params;
 
@@ -26,7 +27,7 @@ SuperBoxSelect.panel.InputOptionsResources = function (config) {
             items: [{
                 layout: 'column',
                 items: [{
-                    columnWidth: .25,
+                    columnWidth: .33,
                     layout: 'form',
                     labelAlign: 'top',
                     items: [{
@@ -34,7 +35,7 @@ SuperBoxSelect.panel.InputOptionsResources = function (config) {
                         fieldLabel: _('resourcelist_parents'),
                         description: MODx.expandHelp ? '' : _('resourcelist_parents_desc'),
                         name: 'inopt_parents',
-                        id: 'inopt_parents',
+                        id: this.ident + 'inopt_parents',
                         value: this.params.parents || '',
                         anchor: '100%',
                         listeners: {
@@ -50,7 +51,7 @@ SuperBoxSelect.panel.InputOptionsResources = function (config) {
                         cls: 'desc-under'
                     }]
                 }, {
-                    columnWidth: .25,
+                    columnWidth: .33,
                     layout: 'form',
                     labelAlign: 'top',
                     items: [{
@@ -58,7 +59,7 @@ SuperBoxSelect.panel.InputOptionsResources = function (config) {
                         fieldLabel: _('resourcelist_depth'),
                         description: MODx.expandHelp ? '' : _('resourcelist_depth_desc'),
                         name: 'inopt_depth',
-                        id: 'inopt_depth',
+                        id: this.ident + 'inopt_depth',
                         value: this.params.depth || 10,
                         anchor: '100%',
                         listeners: {
@@ -74,31 +75,7 @@ SuperBoxSelect.panel.InputOptionsResources = function (config) {
                         cls: 'desc-under'
                     }]
                 }, {
-                    columnWidth: .25,
-                    layout: 'form',
-                    labelAlign: 'top',
-                    items: [{
-                        xtype: 'textfield',
-                        fieldLabel: _('superboxselect.valueField'),
-                        description: MODx.expandHelp ? '' : _('superboxselect.valueField_desc'),
-                        name: 'inopt_valueField',
-                        id: 'inopt_valueField',
-                        value: this.params.valueField || '',
-                        anchor: '100%',
-                        listeners: {
-                            change: {
-                                fn: this.markDirty,
-                                scope: this
-                            }
-                        }
-                    }, {
-                        xtype: MODx.expandHelp ? 'label' : 'hidden',
-                        forId: 'inopt_valueField',
-                        html: _('superboxselect.valueField_desc'),
-                        cls: 'desc-under'
-                    }]
-                }, {
-                    columnWidth: .25,
+                    columnWidth: .34,
                     layout: 'form',
                     labelAlign: 'top',
                     items: [{
@@ -107,7 +84,7 @@ SuperBoxSelect.panel.InputOptionsResources = function (config) {
                         description: MODx.expandHelp ? '' : _('resourcelist_limitrelatedcontext_desc'),
                         name: 'inopt_limitRelatedContext',
                         hiddenName: 'inopt_limitRelatedContext',
-                        id: 'inopt_limitRelatedContext',
+                        id: this.ident + 'inopt_limitRelatedContext',
                         value: this.params.limitRelatedContext === 1 || this.params.limitRelatedContext === 'true' ? 1 : 0,
                         anchor: '100%',
                         listeners: {
@@ -133,7 +110,7 @@ SuperBoxSelect.panel.InputOptionsResources = function (config) {
                     'example_4': '[{"published":1},{"isfolder":0}]'
                 }),
                 name: 'inopt_where',
-                id: 'inopt_where',
+                id: this.ident + 'inopt_where',
                 value: this.params.where || '',
                 anchor: '100%',
                 listeners: {

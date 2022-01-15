@@ -12,11 +12,12 @@ class OptionsProcessor extends Processor
 {
     public $fieldTpl = '{title} ({id})';
     public $inputOptionType = '';
+    public $renderOptions = [];
 
     /**
      * Run the processor and return the result.
      *
-     * @return string
+     * @return mixed
      */
     public function process()
     {
@@ -31,13 +32,27 @@ class OptionsProcessor extends Processor
     }
 
     /**
-     * Get the field template.
+     * Get the render options.
      *
-     * @return string
+     * @return array
      */
-    public function getFieldTpl()
+    public function getRenderOptions()
     {
-        return $this->fieldTpl;
+        $params = $this->getProperty('params');
+        $renderOptions = [
+            'connector' => $this->superboxselect->getOption('connectorUrl')
+        ];
+        $renderOptions = array_merge_recursive($renderOptions, $this->useRenderOptions($params));
+        return $renderOptions;
+    }
+
+    /**
+     * @param $params
+     * @return array
+     */
+    public function useRenderOptions($params)
+    {
+        return [];
     }
 
     /**

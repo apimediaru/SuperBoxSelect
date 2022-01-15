@@ -21,6 +21,41 @@ class SuperboxselectResourcesOptionsProcessor extends OptionsProcessor
         $this->modx->lexicon('superboxselect.resources');
         return parent::initialize();
     }
+
+    public function useRenderOptions($defaults)
+    {
+        $renderOptions = [
+            'params' => [
+                'fieldTpl' => ($defaults['fieldTpl']) ?: $this->fieldTpl,
+                'valueField' => ($defaults['valueField']) ?: 'id',
+            ],
+            'baseParams' => []
+        ];
+        if ($this->getProperty('useRequest')) {
+            $baseParams = [
+                'useRequest' => true,
+                'where' => ($defaults['where']) ?: null,
+                'limitRelatedContext' => ($defaults['limitRelatedContext']) ?: null,
+                'parents' => ($defaults['parents']) ?: null,
+                'depth' => ($defaults['depth']) ?: null
+            ];
+            foreach ($baseParams as $key => $value) {
+                if (is_null($value)) {
+                    unset($baseParams[$key]);
+                }
+            }
+            $renderOptions['baseParams'] = $baseParams;
+
+            $params = [];
+            foreach ($params as $key => $value) {
+                if (is_null($value)) {
+                    unset($params[$key]);
+                }
+            }
+            $renderOptions['params'] = array_merge($renderOptions['params'], $params);
+        }
+        return $renderOptions;
+    }
 }
 
 return 'SuperboxselectResourcesOptionsProcessor';
