@@ -133,7 +133,7 @@ class SuperBoxSelect
         $cssUrl = $this->getOption('cssUrl') . 'mgr/';
         $cssSourceUrl = $assetsUrl . '../../../source/css/mgr/';
 
-        if ($this->getOption('debug') && ($assetsUrl != MODX_ASSETS_URL . 'components/superboxselect/')) {
+        if ($this->getOption('debug') && $assetsUrl != MODX_ASSETS_URL . 'components/superboxselect/') {
             $this->modx->controller->addJavascript($nodeModulesUrl . 'sortablejs/Sortable.js?v=v' . $this->version);
             $this->modx->controller->addJavascript($jsSourceUrl . 'superboxselect.js?v=v' . $this->version);
             $this->modx->controller->addJavascript($jsSourceUrl . 'superboxselect.panel.inputoptions.js?v=v' . $this->version);
