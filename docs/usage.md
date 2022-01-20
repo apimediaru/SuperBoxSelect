@@ -19,7 +19,7 @@ Where Conditions | where | **(Type = Resource)** A JSON object of where conditio
 
 ## MIGX usage
 
-To use a SuperBoxSelect as input TV type, you have to add the follwing values in
+To use a SuperBoxSelect in `inputTVtype`, you have to add the follwing values in
 a MIGX config:
 
 ```
@@ -27,7 +27,7 @@ a MIGX config:
     "configs": {
         "selectType": "users",
         "useRequest": "1",
-        ...
+        "allowedUsergroups": ...
     },
 ```
 

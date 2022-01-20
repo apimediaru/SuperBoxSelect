@@ -74,10 +74,12 @@ class SuperboxselectInputRender extends modTemplateVarInputRender
             'useRequest' => $params['useRequest'],
             'params' => $params
         ]);
-        foreach ($customTypes as $customType) {
-            $customType = unserialize($customType);
-            if ($customType) {
-                $renderOptions = array_merge($renderOptions, $customType);
+        if (is_array($customTypes)) {
+            foreach ($customTypes as $customType) {
+                $customType = unserialize($customType);
+                if ($customType) {
+                    $renderOptions = array_merge($renderOptions, $customType);
+                }
             }
         }
 
