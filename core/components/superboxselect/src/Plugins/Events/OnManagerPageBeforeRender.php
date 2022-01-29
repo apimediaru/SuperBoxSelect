@@ -6,7 +6,6 @@
 
 namespace TreehillStudio\SuperBoxSelect\Plugins\Events;
 
-use modTemplateVar;
 use TreehillStudio\SuperBoxSelect\Plugins\Plugin;
 
 class OnManagerPageBeforeRender extends Plugin
