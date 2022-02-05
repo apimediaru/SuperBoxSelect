@@ -230,10 +230,10 @@ Ext.extend(SuperBoxSelect.panel.InputOptions, MODx.Panel, {
         }
         var tvelements = Ext.getCmp('modx-tv-elements');
         if (tvelements) {
-            tvelements.itemCt.applyStyles({
-                height: '0',
-                overflow: 'hidden'
-            })
+            tvelements.hide();
+            if (MODx.expandHelp) {
+                tvelements.nextSibling('.desc-under').hide();
+            }
         }
         var cmp = this;
         Ext.getCmp('modx-panel-tv-input-properties').addListener('resize', function () {
