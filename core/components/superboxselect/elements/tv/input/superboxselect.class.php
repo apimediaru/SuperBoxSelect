@@ -93,11 +93,11 @@ class SuperboxselectInputRender extends modTemplateVarInputRender
         $params = [
             'allowBlank' => ($params['allowBlank'] == 1 || $params['allowBlank'] == 'true'),
             'fieldTpl' => $params['fieldTpl'],
-            'maxElements' => ($params['maxElements']) ? $params['maxElements'] * 1 : 1,
+            'maxElements' => ($params['maxElements']) ? $params['maxElements'] * 1 : 0,
             'pageSize' => ($params['pageSize']) ? $params['pageSize'] * 1 : 0,
             'stackItems' => $params['stackItems'] == 1 || $params['stackItems'] == 'true'
         ];
-        if ($params['maxElements'] <= 1) {
+        if ($params['maxElements'] == 1) {
             unset($params['stackItems']);
         }
         if (!$params['pageSize']) {
@@ -112,7 +112,7 @@ class SuperboxselectInputRender extends modTemplateVarInputRender
 
         $this->setPlaceholder('baseParams', json_encode($baseParams, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES));
         $this->setPlaceholder('params', json_encode($params, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES));
-        $this->setPlaceholder('multiple', $params['maxElements'] > 1);
+        $this->setPlaceholder('multiple', $params['maxElements'] != 1 );
         $this->setPlaceholder('value', $value);
     }
 }
