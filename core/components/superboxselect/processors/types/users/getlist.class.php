@@ -124,9 +124,10 @@ class SuperboxselectUsersGetListProcessor extends ObjectGetListProcessor
      */
     public function prepareRow(xPDOObject $object)
     {
+        $titleTpl = $this->getProperty('userTitleTpl', '@INLINE [[+username]]');
         return [
             'id' => $object->get('id'),
-            'title' => $object->get('username')
+            'title' => $this->superboxselect->getChunk($titleTpl, $object->toArray())
         ];
     }
 }

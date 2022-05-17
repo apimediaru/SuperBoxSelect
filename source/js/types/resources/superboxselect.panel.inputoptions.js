@@ -27,7 +27,7 @@ SuperBoxSelect.panel.InputOptionsResources = function (config) {
             items: [{
                 layout: 'column',
                 items: [{
-                    columnWidth: .33,
+                    columnWidth: .5,
                     layout: 'form',
                     labelAlign: 'top',
                     items: [{
@@ -51,7 +51,7 @@ SuperBoxSelect.panel.InputOptionsResources = function (config) {
                         cls: 'desc-under'
                     }]
                 }, {
-                    columnWidth: .33,
+                    columnWidth: .5,
                     layout: 'form',
                     labelAlign: 'top',
                     items: [{
@@ -74,8 +74,11 @@ SuperBoxSelect.panel.InputOptionsResources = function (config) {
                         html: _('resourcelist_depth_desc'),
                         cls: 'desc-under'
                     }]
-                }, {
-                    columnWidth: .34,
+                }]
+            }, {
+                layout: 'column',
+                items: [{
+                    columnWidth: (SuperBoxSelect.config.advanced) ? .5 : 1,
                     layout: 'form',
                     labelAlign: 'top',
                     items: [{
@@ -97,6 +100,31 @@ SuperBoxSelect.panel.InputOptionsResources = function (config) {
                         xtype: MODx.expandHelp ? 'label' : 'hidden',
                         forId: 'inopt_limitRelatedContext',
                         html: _('resourcelist_limitrelatedcontext_desc'),
+                        cls: 'desc-under'
+                    }]
+                }, {
+                    columnWidth: .5,
+                    layout: 'form',
+                    labelAlign: 'top',
+                    hidden: !SuperBoxSelect.config.advanced,
+                    items: [{
+                        xtype: 'textfield',
+                        fieldLabel: _('superboxselect.resourceTitleTpl'),
+                        description: MODx.expandHelp ? '' : _('superboxselect.resourceTitleTpl_desc'),
+                        name: 'inopt_resourceTitleTpl',
+                        id: 'inopt_resourceTitleTpl',
+                        value: this.params.resourceTitleTpl || '',
+                        anchor: '100%',
+                        listeners: {
+                            change: {
+                                fn: this.markDirty,
+                                scope: this
+                            }
+                        }
+                    }, {
+                        xtype: MODx.expandHelp ? 'label' : 'hidden',
+                        forId: 'inopt_resourceTitleTpl',
+                        html: _('superboxselect.resourceTitleTpl_desc'),
                         cls: 'desc-under'
                     }]
                 }]

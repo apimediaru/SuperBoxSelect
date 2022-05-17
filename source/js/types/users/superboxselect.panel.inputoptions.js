@@ -27,7 +27,7 @@ SuperBoxSelect.panel.InputOptionsUsers = function (config) {
             items: [{
                 layout: 'column',
                 items: [{
-                    columnWidth: .5,
+                    columnWidth: (SuperBoxSelect.config.advanced) ? .33 : .5,
                     layout: 'form',
                     labelAlign: 'top',
                     items: [{
@@ -51,7 +51,7 @@ SuperBoxSelect.panel.InputOptionsUsers = function (config) {
                         cls: 'desc-under'
                     }]
                 }, {
-                    columnWidth: .5,
+                    columnWidth: (SuperBoxSelect.config.advanced) ? .33 : .5,
                     layout: 'form',
                     labelAlign: 'top',
                     items: [{
@@ -72,6 +72,31 @@ SuperBoxSelect.panel.InputOptionsUsers = function (config) {
                         xtype: MODx.expandHelp ? 'label' : 'hidden',
                         forId: 'inopt_deniedUsergroups',
                         html: _('superboxselect.deniedUsergroups_desc'),
+                        cls: 'desc-under'
+                    }]
+                }, {
+                    columnWidth: .34,
+                    layout: 'form',
+                    labelAlign: 'top',
+                    hidden: !SuperBoxSelect.config.advanced,
+                    items: [{
+                        xtype: 'textfield',
+                        fieldLabel: _('superboxselect.userTitleTpl'),
+                        description: MODx.expandHelp ? '' : _('superboxselect.userTitleTpl_desc'),
+                        name: 'inopt_userTitleTpl',
+                        id: 'inopt_userTitleTpl',
+                        value: this.params.userTitleTpl || '',
+                        anchor: '100%',
+                        listeners: {
+                            change: {
+                                fn: this.markDirty,
+                                scope: this
+                            }
+                        }
+                    }, {
+                        xtype: MODx.expandHelp ? 'label' : 'hidden',
+                        forId: 'inopt_userTitleTpl',
+                        html: _('superboxselect.userTitleTpl_desc'),
                         cls: 'desc-under'
                     }]
                 }]

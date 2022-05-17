@@ -40,13 +40,29 @@ class SuperBoxSelect
      * The version
      * @var string $version
      */
-    public $version = '3.0.4';
+    public $version = '3.0.5';
 
     /**
      * The class options
      * @var array $options
      */
     public $options = [];
+
+    /**
+     * Template cache
+     * @var array $_tplCache
+     */
+    private $_tplCache;
+
+    /**
+     * Valid binding types
+     * @var array $_validTypes
+     */
+    private $_validTypes = [
+        '@CHUNK',
+        '@FILE',
+        '@INLINE'
+    ];
 
     /**
      * SuperBoxSelect constructor
@@ -215,5 +231,125 @@ class SuperBoxSelect
 
         $this->modx->smarty->assign('types', implode(',', $types));
         return $this->modx->smarty->fetch($this->getOption('templatesPath') . 'inputoptionstypes.tpl');
+    }
+
+    /**
+     * Parse a chunk (with template bindings)
+     * Modified parseTplElement method from getResources package (https://github.com/opengeek/getResources)
+     *
+     * @param $type
+     * @param $source
+     * @param null $properties
+     * @return bool|string
+     */
+    private function parseChunk($type, $source, $properties = null)
+    {
+        $output = false;
+
+        if (!is_string($type) || !in_array($type, $this->_validTypes)) {
+            $type = $this->modx->getOption('tplType', $properties, '@CHUNK');
+        }
+
+        $content = false;
+        switch ($type) {
+            case '@FILE':
+                $path = $this->modx->getOption('tplPath', $properties, $this->modx->getOption('assets_path', $properties, MODX_ASSETS_PATH) . 'elements/chunks/');
+                $key = $path . $source;
+                if (!isset($this->_tplCache['@FILE'])) {
+                    $this->_tplCache['@FILE'] = [];
+                }
+                if (!array_key_exists($key, $this->_tplCache['@FILE'])) {
+                    if (file_exists($key)) {
+                        $content = file_get_contents($key);
+                    }
+                    $this->_tplCache['@FILE'][$key] = $content;
+                } else {
+                    $content = $this->_tplCache['@FILE'][$key];
+                }
+                if (!empty($content) && $content !== '0') {
+                    $chunk = $this->modx->newObject('modChunk', ['name' => $key]);
+                    $chunk->setCacheable(false);
+                    $output = $chunk->process($properties, $content);
+                }
+                break;
+            case '@INLINE':
+                $uniqid = uniqid();
+                $chunk = $this->modx->newObject('modChunk', ['name' => "$type-$uniqid"]);
+                $chunk->setCacheable(false);
+                $output = $chunk->process($properties, $source);
+                break;
+            case '@CHUNK':
+            default:
+                $chunk = null;
+                if (!isset($this->_tplCache['@CHUNK'])) {
+                    $this->_tplCache['@CHUNK'] = [];
+                }
+                if (!array_key_exists($source, $this->_tplCache['@CHUNK'])) {
+                    $chunk = $this->modx->getObject('modChunk', ['name' => $source]);
+                    if ($chunk) {
+                        $this->_tplCache['@CHUNK'][$source] = $chunk->toArray('', true);
+                    } else {
+                        $this->_tplCache['@CHUNK'][$source] = false;
+                    }
+                } elseif (is_array($this->_tplCache['@CHUNK'][$source])) {
+                    $chunk = $this->modx->newObject('modChunk');
+                    $chunk->fromArray($this->_tplCache['@CHUNK'][$source], '', true, true, true);
+                }
+                if (is_object($chunk)) {
+                    $chunk->setCacheable(false);
+                    $output = $chunk->process($properties);
+                }
+                break;
+        }
+        return $output;
+    }
+
+    /**
+     * @param $string
+     * @return string
+     */
+    public function stripModxTags($string)
+    {
+        return preg_replace('/\[\[([^\[\]]++|(?R))*?]]/sm', '', $string);
+    }
+
+    /**
+     * Get and parse a chunk (with template bindings)
+     * Modified parseTpl method from getResources package (https://github.com/opengeek/getResources)
+     *
+     * @param $tpl
+     * @param null $properties
+     * @return bool|string
+     */
+    public function getChunk($tpl, $properties = null)
+    {
+        if (class_exists('pdoTools') && $pdo = $this->modx->getService('pdoTools')) {
+            $output = $pdo->getChunk($tpl, $properties);
+        } else {
+            $output = false;
+            if (!empty($tpl)) {
+                $bound = [
+                    'type' => '@CHUNK',
+                    'value' => $tpl
+                ];
+                if (strpos($tpl, '@') === 0) {
+                    $endPos = strpos($tpl, ' ');
+                    if ($endPos > 2 && $endPos < 10) {
+                        $tt = substr($tpl, 0, $endPos);
+                        if (in_array($tt, $this->_validTypes)) {
+                            $bound['type'] = $tt;
+                            $bound['value'] = substr($tpl, $endPos + 1);
+                        }
+                    }
+                }
+                if (is_array($bound) && isset($bound['type']) && isset($bound['value'])) {
+                    $output = $this->parseChunk($bound['type'], $bound['value'], $properties);
+                }
+                if (isset($properties['stripModxTags']) && $properties['stripModxTags']) {
+                    $output = $this->stripModxTags($output);
+                }
+            }
+        }
+        return $output;
     }
 }

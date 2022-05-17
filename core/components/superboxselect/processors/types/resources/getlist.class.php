@@ -174,8 +174,7 @@ class SuperboxselectResourcesGetListProcessor extends ObjectGetListProcessor
                 ]);
             }
         }
-        $c->sortby('pagetitle');
-
+        $c->sortby($this->getProperty('defaultSortField'), $this->getProperty('defaultSortDirection'));
         return $c;
     }
 
@@ -187,9 +186,10 @@ class SuperboxselectResourcesGetListProcessor extends ObjectGetListProcessor
     {
         $valueField = $this->getProperty('valueField', 'id');
         $valueField = (in_array($valueField, $this->modx->getFields($this->classKey))) ? $valueField : 'id';
+        $titleTpl = $this->getProperty('resourceTitleTpl', '@INLINE [[+pagetitle]]');
         return [
             'id' => $object->get($valueField),
-            'title' => $object->get('pagetitle')
+            'title' => $this->superboxselect->getChunk($titleTpl, $object->toArray())
         ];
     }
 }
