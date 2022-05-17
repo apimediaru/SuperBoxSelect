@@ -38,6 +38,8 @@ class SuperboxselectResourcesOptionsProcessor extends OptionsProcessor
                 'limitRelatedContext' => ($defaults['limitRelatedContext']) ?: null,
                 'parents' => ($defaults['parents']) ?: null,
                 'depth' => ($defaults['depth']) ?: null,
+                'sortBy' => ($defaults['sortBy']) ?: null,
+                'sortDir' => ($defaults['sortDir']) ?: null,
                 'resourceTitleTpl' => ($defaults['resourceTitleTpl']) ?: null
             ];
             foreach ($baseParams as $key => $value) {

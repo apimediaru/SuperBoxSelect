@@ -174,6 +174,9 @@ class SuperboxselectResourcesGetListProcessor extends ObjectGetListProcessor
                 ]);
             }
         }
+        if ($this->getProperty('sortBy')) {
+            $c->sortby($this->getProperty('sortBy'), $this->getProperty('sortDir'));
+        }
         $c->sortby($this->getProperty('defaultSortField'), $this->getProperty('defaultSortDirection'));
         return $c;
     }

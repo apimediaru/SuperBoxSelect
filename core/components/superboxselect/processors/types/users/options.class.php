@@ -36,6 +36,8 @@ class SuperboxselectUsersOptionsProcessor extends OptionsProcessor
                 'useRequest' => true,
                 'allowedUsergroups' => ($defaults['allowedUsergroups']) ?: null,
                 'deniedUsergroups' => ($defaults['deniedUsergroups']) ?: null,
+                'sortBy' => ($defaults['sortBy']) ?: null,
+                'sortDir' => ($defaults['sortDir']) ?: null,
                 'userTitleTpl' => ($defaults['userTitleTpl']) ?: null
             ];
             foreach ($baseParams as $key => $value) {

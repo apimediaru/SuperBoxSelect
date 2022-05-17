@@ -72,6 +72,7 @@ SuperBoxSelect.panel.InputOptions = function (config) {
                 columnWidth: .33,
                 layout: 'form',
                 labelAlign: 'top',
+                hidden: !SuperBoxSelect.config.advanced,
                 items: [{
                     xtype: 'textfield',
                     fieldLabel: _('superboxselect.fieldTpl'),
@@ -80,7 +81,6 @@ SuperBoxSelect.panel.InputOptions = function (config) {
                     id: 'inopt_fieldTpl',
                     value: this.params.fieldTpl || '',
                     anchor: '100%',
-                    hidden: !SuperBoxSelect.config.advanced,
                     listeners: {
                         change: {
                             fn: this.markDirty,
@@ -92,7 +92,6 @@ SuperBoxSelect.panel.InputOptions = function (config) {
                     forId: 'inopt_fieldTpl',
                     html: _('superboxselect.fieldTpl_desc'),
                     cls: 'desc-under',
-                    hidden: !SuperBoxSelect.config.advanced
                 }]
             }, {
                 columnWidth: (SuperBoxSelect.config.advanced) ? .34 : .5,
@@ -171,6 +170,74 @@ SuperBoxSelect.panel.InputOptions = function (config) {
                     xtype: MODx.expandHelp ? 'label' : 'hidden',
                     forId: 'inopt_pageSize',
                     html: _('superboxselect.pageSize_desc'),
+                    cls: 'desc-under'
+                }]
+            }]
+        }, {
+            layout: 'column',
+            hidden: !SuperBoxSelect.config.advanced,
+            items: [{
+                columnWidth: .5,
+                layout: 'form',
+                labelAlign: 'top',
+                items: [{
+                    xtype: 'textfield',
+                    fieldLabel: _('superboxselect.sortBy'),
+                    description: MODx.expandHelp ? '' : _('superboxselect.sortBy_desc'),
+                    name: 'inopt_sortBy',
+                    hiddenName: 'inopt_sortBy',
+                    id: 'inopt_sortBy',
+                    value: this.params.sortBy || '',
+                    anchor: '100%',
+                    listeners: {
+                        change: {
+                            fn: this.markDirty,
+                            scope: this
+                        }
+                    }
+                }, {
+                    xtype: MODx.expandHelp ? 'label' : 'hidden',
+                    forId: 'inopt_sortBy',
+                    html: _('superboxselect.sortBy_desc'),
+                    cls: 'desc-under'
+                }]
+            }, {
+                columnWidth: .5,
+                layout: 'form',
+                labelAlign: 'top',
+                items: [{
+                    xtype: 'combo',
+                    fieldLabel: _('superboxselect.sortDir'),
+                    description: MODx.expandHelp ? '' : _('superboxselect.sortDir_desc'),
+                    name: 'inopt_sortDir',
+                    hiddenName: 'inopt_sortDir',
+                    id: 'inopt_sortDir',
+                    value: this.params.sortDir || 'asc',
+                    typeAhead: true,
+                    triggerAction: 'all',
+                    editable: false,
+    mode: 'local',
+                    displayField: 'display',
+                    valueField: 'value',
+                    lazyInit: false,
+                    store: new Ext.data.SimpleStore({
+                        fields: ['display', 'value'],
+                        data: [
+                            [_('sort_asc'), 'asc'],
+                            [_('sort_desc'), 'desc']
+                        ]
+                    }),
+                    anchor: '100%',
+                    listeners: {
+                        change: {
+                            fn: this.markDirty,
+                            scope: this
+                        }
+                    }
+                }, {
+                    xtype: MODx.expandHelp ? 'label' : 'hidden',
+                    forId: 'inopt_sortDir',
+                    html: _('superboxselect.sortDir_desc'),
                     cls: 'desc-under'
                 }]
             }]
