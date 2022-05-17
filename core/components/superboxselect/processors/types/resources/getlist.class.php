@@ -46,7 +46,8 @@ class SuperboxselectResourcesGetListProcessor extends ObjectGetListProcessor
             $this->modx->log(xPDO::LOG_LEVEL_ERROR, 'Invalid template variable ID!', '', 'SuperBoxSelect');
         }
         $where = $this->modx->getOption('where', $tvProperties, '', true);
-        $limitRelatedContext = $this->modx->getOption('limitRelatedContext', $tvProperties, '0', true) == '1';
+        $limitRelatedContext = $this->modx->getOption('limitRelatedContext', $tvProperties, '0', true);
+        $limitRelatedContext = $limitRelatedContext == '1' || $limitRelatedContext == 'true';
         $contextKey = ($limitRelatedContext) ? $this->getProperty('contextKey', false) : false;
         $resourceId = (int)$this->getProperty('resourceId');
         $parents = $this->modx->getOption('parents', $tvProperties, '', true);
@@ -66,7 +67,7 @@ class SuperboxselectResourcesGetListProcessor extends ObjectGetListProcessor
         }
 
         // Restrict to related context
-        if (!empty($limitRelatedContext) && ($limitRelatedContext == 1 || $limitRelatedContext == 'true')) {
+        if ($limitRelatedContext) {
             $c->where(['context_key' => $contextKey]);
         }
 
