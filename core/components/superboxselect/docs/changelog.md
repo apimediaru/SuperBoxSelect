@@ -11,6 +11,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - sortBy and sortDir for custom sorting of the SuperboxSelect rows
 
+### Fixed
+
+- Fix limitRelatedContext property for the resource list
+
 ## [3.0.5] - 2022-05-17
 
 ### Added
