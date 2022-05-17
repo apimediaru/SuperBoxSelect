@@ -65,17 +65,17 @@ class SuperboxselectUsersGetListProcessor extends ObjectGetListProcessor
 
         $c->select($this->modx->getSelectColumns($this->classKey, $this->classKey, '', ['id', 'username']));
 
-        if ($allowedUsergroups || $deniedUsergroups) {
+        if (!empty($allowedUsergroups) || !empty($deniedUsergroups)) {
             $c->leftJoin('modUserGroupMember', 'modUserGroupMember', ['modUserGroupMember.member = modUser.id']);
             $c->leftJoin('modUserGroup', 'modUserGroup', ['modUserGroup.id = modUserGroupMember.user_group']);
             $c->groupby('modUser.id');
-            if ($allowedUsergroups) {
+            if (!empty($allowedUsergroups)) {
                 $allowedUsergroups = explode(',', $allowedUsergroups);
                 $c->where([
                     'modUserGroup.name:IN' => $allowedUsergroups
                 ]);
             }
-            if ($deniedUsergroups) {
+            if (!empty($deniedUsergroups)) {
                 $deniedUsergroups = explode(',', $deniedUsergroups);
                 $c->where([
                     [
@@ -113,6 +113,9 @@ class SuperboxselectUsersGetListProcessor extends ObjectGetListProcessor
             $c->where([
                 'id:IN' => array_map('intval', explode('||', $id))
             ]);
+        }
+        if ($this->getProperty('sortBy')) {
+            $c->sortby($this->getProperty('sortBy'), $this->getProperty('sortDir'));
         }
         $c->sortby($this->getProperty('defaultSortField'), $this->getProperty('defaultSortDirection'));
         return $c;
