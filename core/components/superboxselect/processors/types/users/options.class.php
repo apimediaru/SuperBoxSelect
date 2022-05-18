@@ -38,7 +38,7 @@ class SuperboxselectUsersOptionsProcessor extends OptionsProcessor
                 'deniedUsergroups' => ($defaults['deniedUsergroups']) ?: null,
                 'sortBy' => ($defaults['sortBy']) ?: null,
                 'sortDir' => ($defaults['sortDir']) ?: null,
-                'userTitleTpl' => ($defaults['userTitleTpl']) ?: null
+                'userTitleTpl' => ($defaults['userTitleTpl']) ?: null,
             ];
             foreach ($baseParams as $key => $value) {
                 if (is_null($value)) {

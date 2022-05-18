@@ -14,6 +14,8 @@ Max. Elements | maxElements | Maximum number of elements in the list. 0 means no
 Page Size | pageSize | If the page size is greater than 0 and max. elements is 1, a pagination is displayed in the footer of the dropdown list. | -
 Parents | parents | **(Type = Resources)** A list of IDs to grab children for the list. | -
 Resource Title Template | resourceTitleTpl | **(System setting superboxselect.advanced = active AND Type = Resources)** Resource title template for the SuperBoxSelect. Can use @FILE, @INLINE bindings. Default: @INLINE [[+pagetitle]] | -
+Sort By | sortBy | The name of the column, the SuperBoxSelect list is sorted by. Default: pagetitle for resource input type, username for user input type. | -
+Sort Dir | sortDir | The direction, the SuperBoxSelect list is sorted by. Default: Ascending. | Ascending
 Stack Items | stackItems | If enabled, the SuperBoxSelect items will be stacked one per line. Per default the items are displayed inline. | No
 Type | selectType | Content type of the dropdown list. | Resources
 User Title Template | userTitleTpl | **(System setting superboxselect.advanced = active AND Type = Users)** User title template for the SuperBoxSelect. Can use @FILE, @INLINE bindings. Default: @INLINE [[+username]] | -

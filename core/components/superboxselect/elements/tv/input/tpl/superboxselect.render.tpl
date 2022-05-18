@@ -8,6 +8,7 @@
             root: 'results',
             fields: ['id', 'title'],{/literal}
             url: '{$connector}',{literal}
+            remoteSort: true,
             baseParams: {{/literal}{$baseParams|default|regex_replace:"/^\{(.*)\n\}$/sm":"$1"|indent:12}{literal}
             }
         });{/literal}

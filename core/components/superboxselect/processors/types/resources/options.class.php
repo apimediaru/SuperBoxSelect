@@ -40,7 +40,7 @@ class SuperboxselectResourcesOptionsProcessor extends OptionsProcessor
                 'depth' => ($defaults['depth']) ?: null,
                 'sortBy' => ($defaults['sortBy']) ?: null,
                 'sortDir' => ($defaults['sortDir']) ?: null,
-                'resourceTitleTpl' => ($defaults['resourceTitleTpl']) ?: null
+                'resourceTitleTpl' => ($defaults['resourceTitleTpl']) ?: null,
             ];
             foreach ($baseParams as $key => $value) {
                 if (is_null($value)) {
