@@ -8,7 +8,7 @@
 SuperBoxSelect.panel.InputOptionsResources = function (config) {
     config = config || {};
 
-    this.ident = 'input-options-resources' + Ext.id();
+    this.ident = 'input-options-resources-' + Ext.id();
     this.options = config.options;
     this.params = config.params;
 

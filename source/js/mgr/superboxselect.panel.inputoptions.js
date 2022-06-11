@@ -303,10 +303,11 @@ Ext.extend(SuperBoxSelect.panel.InputOptions, MODx.Panel, {
             }
         }
         var cmp = this;
+        var tvTabId = (SuperBoxSelect.config.modxversion === '2') ? 'modx-tv-tabs' : 'modx-tv-editor-tabs';
         Ext.getCmp('modx-panel-tv-input-properties').addListener('resize', function () {
             cmp.setWidth(Ext.getCmp('modx-input-props').getWidth()).doLayout();
         });
-        Ext.getCmp('modx-tv-tabs').addListener('tabchange', function () {
+        Ext.getCmp(tvTabId).addListener('tabchange', function () {
             cmp.setWidth(Ext.getCmp('modx-input-props').getWidth()).doLayout();
         });
     },

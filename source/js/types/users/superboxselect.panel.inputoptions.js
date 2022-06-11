@@ -8,7 +8,7 @@
 SuperBoxSelect.panel.InputOptionsUsers = function (config) {
     config = config || {};
 
-    this.ident = 'input-options-users' + Ext.id();
+    this.ident = 'input-options-users-' + Ext.id();
     this.options = config.options;
     this.params = config.params;
 
