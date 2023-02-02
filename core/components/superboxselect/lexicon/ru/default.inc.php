@@ -32,3 +32,5 @@ $_lang['superboxselect.sortBy'] = 'Сортировать по';
 $_lang['superboxselect.sortDir'] = 'Порядок сортировки';
 $_lang['superboxselect.sortBy_desc'] = 'Имя столбца, по которому сортируется список SuperBoxSelect. По умолчанию: pagetitle для типа ввода ресурса, username для типа ввода пользователя.';
 $_lang['superboxselect.sortDir_desc'] = 'Направление, по которому сортируется список SuperBoxSelect. По умолчанию: По возрастанию.';
+$_lang['superboxselect.showUnpublished'] = 'Показывать неопубликованные';
+$_lang['superboxselect.showUnpublished_desc'] = 'Включить в выборку неопубликованные ресурсы';

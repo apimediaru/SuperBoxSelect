@@ -54,6 +54,8 @@ class SuperboxselectResourcesGetListProcessor extends ObjectGetListProcessor
         $parents = ($parents) ? explode(',', $parents) : [];
         $depth = (int)$this->modx->getOption('depth', $tvProperties, 10, true);
         $valueField = $this->modx->getOption('valueField', $tvProperties, 'id', true);
+        $this->setProperty('optShowUnpublished', $this->modx->getOption('showUnpublished', $tvProperties));
+        $showUnpublished = $this->getBooleanProperty('optShowUnpublished', false);
 
         if ($where) {
             $where = json_decode($where, true);
@@ -140,8 +142,13 @@ class SuperboxselectResourcesGetListProcessor extends ObjectGetListProcessor
 
         $c->where([
             'deleted' => false,
-            'published' => true
         ]);
+
+        if (!$showUnpublished) {
+            $c->where([
+                'published' => true,
+            ]);
+        }
 
         if ($this->superboxselect->getOption('debug')) {
             $c->prepare();

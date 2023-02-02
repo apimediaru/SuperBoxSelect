@@ -78,6 +78,34 @@ SuperBoxSelect.panel.InputOptionsResources = function (config) {
             }, {
                 layout: 'column',
                 items: [{
+                    columnWidth: .5,
+                    layout: 'form',
+                    labelAlign: 'top',
+                    items: [{
+                        xtype: 'combo-boolean',
+                        fieldLabel: _('superboxselect.showUnpublished'),
+                        description: MODx.expandHelp ? '' : _('superboxselect.showUnpublished_desc'),
+                        name: 'inopt_showUnpublished',
+                        hiddenName: 'inopt_showUnpublished',
+                        id: 'inopt_showUnpublished',
+                        value: this.params.showUnpublished === 1 || this.params.showUnpublished === 'true' ? 1 : 0,
+                        anchor: '100%',
+                        listeners: {
+                            change: {
+                                fn: this.markDirty,
+                                scope: this
+                            }
+                        }
+                    }, {
+                        xtype: MODx.expandHelp ? 'label' : 'hidden',
+                        forId: 'inopt_showUnpublished',
+                        html: _('superboxselect.showUnpublished_desc'),
+                        cls: 'desc-under'
+                    }]
+                }]
+            }, {
+                layout: 'column',
+                items: [{
                     columnWidth: (SuperBoxSelect.config.advanced) ? .5 : 1,
                     layout: 'form',
                     labelAlign: 'top',
