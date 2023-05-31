@@ -8,9 +8,9 @@ $treehillstudio-color: #cbd842;
   .x-superboxselect-btns {
     .x-superboxselect-btn-clear {
       width: 30px;
-      height: 30px;
+      height: 100%;
       position: absolute;
-      right: 30px;
+      right: 0;
       border: none;
       &:before {
         box-sizing: border-box;
